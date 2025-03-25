@@ -53,7 +53,7 @@ export default function Hero() {
                 <br />
                 Let’s Conquer Together!
               </h1>
-              <p className="text-xl md:text-2xl mt-4">
+              <p className="md:text-2xl text-xl mt-4">
                 I build fast, secure, and user-friendly websites with Full Stack
                 and <br /> WordPress development to help grow your business
                 seamlessly.
