@@ -48,11 +48,12 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="font-[Recoleta] text-4xl md:text-6xl font-bold text-black">
-                Hassle-Free Web Solutions—Let Me Build, So You Can Focus on Your
-                Business!
+              <h1 className="font-[Recoleta] text-2xl md:text-5xl font-bold text-black">
+                Code That Powers Your Business Growth
+                <br />
+                Let’s Conquer Together!
               </h1>
-              <p className="text-2xl mt-4">
+              <p className="text-xl md:text-2xl mt-4">
                 I build fast, secure, and user-friendly websites with Full Stack
                 and <br /> WordPress development to help grow your business
                 seamlessly.
