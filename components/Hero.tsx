@@ -68,7 +68,7 @@ export default function Hero() {
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="grid md:grid-cols-4 grid-cols-2 gap-5 bg-white p-5 rounded-xl mt-10"
+          className="grid md:grid-cols-4 grid-cols-2 md:gap-5 gap-2 bg-white md:p-5 p-2 rounded-xl mt-10"
         >
           {/* Work With */}
           <motion.div

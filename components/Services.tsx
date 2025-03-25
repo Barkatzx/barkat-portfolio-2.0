@@ -7,16 +7,16 @@ import { SiGitconnected } from "react-icons/si";
 
 const services = [
   {
-    icon: <FaCode className="w-10 h-10" />,
+    icon: <FaCode className="w-8 h-8" />,
     title: "Full Stack Superpowers",
     subtitle:
-      "I craft high-performance web apps like your favorite coffee – with React, Node.js, Express, and MongoDB, delivering a slick front-end and bulletproof back-end. ☕🚀",
+      "Building lightning-fast web apps with React, Node.js, Express, and MongoDB – sleek front-end, rock-solid back-end. ☕🚀",
   },
   {
     icon: <FaWordpress className="w-8 h-8" />,
     title: "WordPress Solutions",
     subtitle:
-      "Need a standout theme or a plugin that works? I create custom WordPress solutions—from theme tweaks to Elementor magic, making your site run like butter! 🪄✨",
+      "Need a custom WordPress theme or plugin? I craft seamless solutions— from theme tweaks to Elementor magic, making your site run effortlessly! 🪄✨",
   },
   {
     icon: <FaShoppingCart className="w-8 h-8" />,
