@@ -1,8 +1,6 @@
 "use client";
 
-import heroImage from "@/public/img/barkat-hero.png";
 import { motion, useAnimation } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -42,43 +40,22 @@ export default function Hero() {
       />
 
       <div className="container mx-auto px-5 md:px-20 relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          {/* Left Side - Image */}
-          <div className="w-full md:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Image
-                src={heroImage}
-                alt="Hero Illustration"
-                width={500}
-                height={500}
-                className="rounded-lg object-cover"
-                priority
-              />
-            </motion.div>
-          </div>
-
+        <div className="text-center">
           {/* Right Side - Content */}
-          <div className="w-full md:w-1/2 space-y-6">
+          <div className="space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h1 className="font-[Recoleta] text-4xl md:text-6xl font-bold text-black">
-                Hello Friends!!
+                Hassle-Free Web Solutions—Let Me Build, So You Can Focus on Your
+                Business!
               </h1>
-              <p className="md:text-4xl text-2xl mt-4">
-                I&apos;m Barkat Ullah, a{" "}
-                <span className="font-[Recoleta] underline">
-                  Full Stack & WordPress Expert
-                </span>
-                , and the creator behind various web projects. I&apos;m
-                passionate about coding, creating engaging content, and
-                empowering others to grow in the tech space.
+              <p className="text-2xl mt-4">
+                I build fast, secure, and user-friendly websites with Full Stack
+                and <br /> WordPress development to help grow your business
+                seamlessly.
               </p>
             </motion.div>
           </div>
@@ -90,12 +67,12 @@ export default function Hero() {
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="grid md:grid-cols-4 grid-cols-1 gap-5 bg-white p-5 rounded-xl mt-10"
+          className="grid md:grid-cols-4 grid-cols-2 gap-5 bg-white p-5 rounded-xl mt-10"
         >
           {/* Work With */}
           <motion.div
             variants={itemVariants}
-            className="bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-2"
+            className="bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-5"
           >
             <motion.h2
               className="font-[Recoleta] text-4xl font-bold text-center"
@@ -114,12 +91,12 @@ export default function Hero() {
           {/* Years of Experience */}
           <motion.div
             variants={itemVariants}
-            className="font-[Recoleta] bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-2"
+            className="font-[Recoleta] bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-5"
           >
             <Counter target={3} duration={1} delay={0.4}>
               {(value) => (
                 <motion.h1
-                  className="text-5xl font-bold"
+                  className="text-4xl font-bold"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{
@@ -144,12 +121,12 @@ export default function Hero() {
           {/* Company */}
           <motion.div
             variants={itemVariants}
-            className="font-[Recoleta] bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-2"
+            className="font-[Recoleta] bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-5"
           >
             <Counter target={20} duration={1.2} delay={0.6}>
               {(value) => (
                 <motion.h1
-                  className="text-5xl font-bold"
+                  className="text-4xl font-bold"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{
@@ -174,12 +151,12 @@ export default function Hero() {
           {/* Projects */}
           <motion.div
             variants={itemVariants}
-            className="font-[Recoleta] bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-2"
+            className="font-[Recoleta] bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-5"
           >
             <Counter target={80} duration={1.5} delay={0.8}>
               {(value) => (
                 <motion.h1
-                  className="text-5xl font-bold"
+                  className="text-4xl font-bold"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{

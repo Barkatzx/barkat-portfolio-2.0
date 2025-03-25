@@ -1,4 +1,4 @@
-"use client"; // Add this directive at the very top
+"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -60,7 +60,7 @@ export default function Header() {
           initial="hidden"
           animate="visible"
         >
-          {["Home", "About", "Contact"].map((item, i) => (
+          {["About", "Contact"].map((item, i) => (
             <motion.div
               key={item}
               variants={navItemVariants}
@@ -70,7 +70,7 @@ export default function Header() {
             >
               <Link
                 href={`/${item.toLowerCase()}`}
-                className="hover:text-green-500 transition-colors font-semibold text-xl"
+                className="hover:text-sky-400 transition-colors font-semibold text-xl"
               >
                 {item}
               </Link>
@@ -86,7 +86,7 @@ export default function Header() {
       >
         <button
           onClick={toggleMenu}
-          className="text-gray-700 hover:text-blue-600 focus:outline-none bg-green-300 p-2 rounded-md"
+          className="text-white hover:text-sky-400 focus:outline-none bg-sky-400 p-2 rounded-md"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
@@ -105,7 +105,7 @@ export default function Header() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="md:hidden absolute top-25 left-0 right-0 bg-[#f9f6f3] shadow-lg z-50"
+            className="md:hidden absolute top-25 left-2 right-2 bg-[#f9f6f3] shadow-lg z-50"
           >
             <nav className="flex flex-col items-center py-4">
               {["Home", "About", "Contact"].map((item, i) => (
@@ -132,7 +132,11 @@ export default function Header() {
       </AnimatePresence>
 
       {/* Right spacer for desktop */}
-      <div className="hidden md:block flex-1"></div>
+      <div className="hidden md:block flex-1">
+        <button className="bg-sky-400 px-8 py-1 rounded-full text-lg font-semibold text-black hover:bg-amber-500 transition-colors">
+          Contact Me
+        </button>
+      </div>
     </header>
   );
 }

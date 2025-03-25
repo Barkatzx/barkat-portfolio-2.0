@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Barkat Ullah - Portfolio</title>
       </head>
-      <body>
+      <body data-new-gr-c-s-check-loaded="14.1228.0" data-gr-ext-installed="">
         <Header />
         {children}
         <Footer />
