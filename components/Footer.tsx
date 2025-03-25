@@ -57,13 +57,13 @@ export default function Footer() {
 
           {/* Second Column - Menu */}
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-xl font-bold mb-6">Menu</h3>
+            <h3 className="font-[Recoleta] text-xl font-bold mb-6">Menu</h3>
             <ul className="space-y-3 text-center md:text-left">
               {["About", "Services", "Portfolio", "Contact"].map((item) => (
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase()}`}
-                    className="text-gray-600 hover:text-green-500 transition-colors"
+                    className="text-gray-600 hover:text-sky-400 transition-colors"
                   >
                     {item}
                   </Link>
@@ -74,7 +74,7 @@ export default function Footer() {
 
           {/* Third Column - Platforms */}
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-xl font-bold mb-6">Hire Me</h3>
+            <h3 className="font-[Recoleta] text-xl font-bold mb-6">Hire Me</h3>
             <ul className="space-y-3 text-center md:text-left">
               <HireLink
                 href="https://upwork.com/freelancers/barkatzx"
@@ -118,7 +118,7 @@ function SocialLink({
     <Link
       href={href}
       target="_blank"
-      className="bg-white p-3 rounded-full hover:bg-green-50 transition-colors"
+      className="bg-white p-3 rounded-full hover:bg-sky-100 transition-colors"
       aria-label={label}
     >
       <Icon className="text-gray-800 text-xl" />
@@ -141,7 +141,7 @@ function HireLink({
       <Link
         href={href}
         target="_blank"
-        className="flex items-center justify-center md:justify-start text-gray-600 hover:text-green-500 transition-colors"
+        className="flex items-center justify-center md:justify-start text-gray-600 hover:text-sky-400 transition-colors"
       >
         <Icon className="mr-2 text-lg" /> {label}
       </Link>
