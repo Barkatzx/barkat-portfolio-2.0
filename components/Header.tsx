@@ -40,7 +40,7 @@ export default function Header() {
   };
 
   return (
-    <header className="container mx-auto bg-[#f9f6f3] sticky top-0 z-40 flex items-center justify-between px-5 md:px-20 py-10 rounded-t-2xl">
+    <header className=" bg-[#f9f6f3] flex items-center justify-between px-5 md:px-20 py-10 rounded-t-2xl">
       {/* Logo */}
       <motion.div
         className="flex-1"
@@ -70,7 +70,7 @@ export default function Header() {
             >
               <Link
                 href={`/${item.toLowerCase()}`}
-                className="hover:text-blue-600 transition-colors font-semibold"
+                className="hover:text-green-500 transition-colors font-semibold text-xl"
               >
                 {item}
               </Link>
