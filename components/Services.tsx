@@ -64,7 +64,7 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="font-[Recoleta] text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold mb-4 bg-amber-500 text-black p-2 rounded-lg inline-block">
             Services For Your Business 🚀
           </h2>
 
@@ -82,10 +82,9 @@ export default function Services() {
               whileInView={{ opacity: 2, y: 0 }}
               transition={{ duration: 0.1, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#f9f6f3] rounded-xl p-4 transition-all duration-300 cursor-pointer group"
+              className="bg-[#f9f6f3] rounded-xl p-4 transition-all duration-300 group"
               whileHover={{
                 backgroundColor: hoverColors[index % hoverColors.length],
-                color: "white",
                 boxShadow:
                   "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
                 transition: { duration: 0.1 },
@@ -93,7 +92,7 @@ export default function Services() {
             >
               <div className="flex flex-col p-4">
                 <div
-                  className="mb-4 text-sky-500 group-hover:text-white"
+                  className="mb-4 text-sky-500"
                   style={{
                     // Change icon color on hover
                     transition: "color 0.1s ease",
@@ -101,12 +100,10 @@ export default function Services() {
                 >
                   {service.icon}
                 </div>
-                <h3 className="font-[Recoleta] font-bold text-2xl mb-2 group-hover:text-white">
+                <h3 className="font-[Recoleta] font-bold text-2xl mb-2">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 group-hover:text-white/90 text-xl">
-                  {service.subtitle}
-                </p>
+                <p className="text-gray-600 text-xl">{service.subtitle}</p>
               </div>
             </motion.div>
           ))}
