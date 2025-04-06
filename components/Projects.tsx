@@ -9,8 +9,6 @@ interface Project {
   _id: string;
   photo: string;
   title: string;
-  description: string;
-  feature: string;
   category: string;
   technology: string[];
   livelink: string;
@@ -73,7 +71,7 @@ const Projects = () => {
   }
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 ">
+    <section className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -163,7 +161,6 @@ const Projects = () => {
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     onError={(e) => {
-                      // Fallback to default image if the project image fails to load
                       const target = e.target as HTMLImageElement;
                       target.src = DEFAULT_PROJECT_IMAGE;
                     }}
@@ -171,7 +168,7 @@ const Projects = () => {
                 </div>
 
                 <div className="p-6">
-                  <div className="flex justify-between items-start mb-2">
+                  <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-bold text-gray-900">
                       {project.title}
                     </h3>
@@ -180,22 +177,9 @@ const Projects = () => {
                     </span>
                   </div>
 
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-
                   <div className="mb-4">
                     <h4 className="font-semibold text-gray-900 mb-2">
-                      Key Features:
-                    </h4>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
-                      {project.feature.split("\n").map((feature, i) => (
-                        <li key={i}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">
-                      Technologies:
+                      Technologies Used:
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {project.technology.map((tech, i) => (
@@ -207,6 +191,10 @@ const Projects = () => {
                         </span>
                       ))}
                     </div>
+                  </div>
+
+                  <div className="flex flex-col space-y-2 text-sm text-gray-500 mb-4">
+                    <p>* Project details available in GitHub repository</p>
                   </div>
 
                   <div className="flex justify-between items-center pt-4 border-t border-gray-200">
@@ -225,7 +213,7 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
                       >
-                        <FaGithub className="mr-1" /> Client
+                        <FaGithub className="mr-1" /> Code
                       </a>
                       {project.serverlink && (
                         <a
@@ -234,7 +222,7 @@ const Projects = () => {
                           rel="noopener noreferrer"
                           className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
                         >
-                          <FaGithub className="mr-1" /> Server
+                          <FaGithub className="mr-1" /> API
                         </a>
                       )}
                     </div>
