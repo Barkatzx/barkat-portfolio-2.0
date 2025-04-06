@@ -86,11 +86,11 @@ export default function Header() {
       >
         <button
           onClick={toggleMenu}
-          className="text-white hover:text-sky-400 focus:outline-none bg-sky-400 p-2 rounded-md"
+          className="text-white hover:text-black focus:outline-none bg-sky-400 p-2 rounded-md"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
-            <FiX size={24} className="text-red-500" />
+            <FiX size={24} className="text-black" />
           ) : (
             <FiMenu size={24} />
           )}
@@ -105,10 +105,10 @@ export default function Header() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="md:hidden absolute top-25 left-2 right-2 bg-[#f9f6f3] shadow-lg z-50"
+            className="md:hidden absolute top-25 left-3 right-3 bg-[#f9f6f3] shadow-lg z-50 font-bold text-lg"
           >
             <nav className="flex flex-col items-center py-4">
-              {["Home", "About", "Contact"].map((item, i) => (
+              {["About", "Contact"].map((item, i) => (
                 <motion.div
                   key={item}
                   variants={navItemVariants}

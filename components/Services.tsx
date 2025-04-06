@@ -22,7 +22,7 @@ const services = [
     icon: <FaShoppingCart className="w-8 h-8" />,
     title: "WooCommerce Magic",
     subtitle:
-      "I create high-converting WooCommerce stores with seamless payments and custom features, designed to boost sales and wow your customers! I ensure it’s designed to sell💰✨",
+      "I create high-converting WooCommerce stores with seamless payments and custom features, designed to boost sales and wow your customers! I ensure it's designed to sell💰✨",
   },
   {
     icon: <SiGitconnected className="w-8 h-8" />,
@@ -40,8 +40,17 @@ const services = [
     icon: <FaBug className="w-8 h-8" />,
     title: "The Code Doctor",
     subtitle:
-      "I’m prescribing bug fixes to keep your site healthy, ensuring smooth performance, error-free code, and a hassle-free experience for your users. Regular update keeps your site well! 🩺",
+      "I'm prescribing bug fixes to keep your site healthy, ensuring smooth performance, error-free code, and a hassle-free experience for your users. Regular update keeps your site well! 🩺",
   },
+];
+
+const hoverColors = [
+  "#cdb4db",
+  "#bdb2ff",
+  "#ffafcc",
+  "#e4c1f9",
+  "#a2d2ff",
+  "#ccd5ae",
 ];
 
 export default function Services() {
@@ -70,16 +79,29 @@ export default function Services() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileInView={{ opacity: 2, y: 0 }}
+              transition={{ duration: 0.1, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#f9f6f3] hover:bg-sky-400 hover:text-white rounded-xl p-4 transition-all duration-300 cursor-pointer group"
+              className="bg-[#f9f6f3] rounded-xl p-4 transition-all duration-300 cursor-pointer group"
+              whileHover={{
+                backgroundColor: hoverColors[index % hoverColors.length],
+                color: "white",
+                boxShadow:
+                  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                transition: { duration: 0.1 },
+              }}
             >
               <div className="flex flex-col p-4">
-                <div className="mb-4 text-sky-500 group-hover:text-white">
+                <div
+                  className="mb-4 text-sky-500 group-hover:text-white"
+                  style={{
+                    // Change icon color on hover
+                    transition: "color 0.1s ease",
+                  }}
+                >
                   {service.icon}
                 </div>
-                <h3 className="font-[Recoleta] font-bold text-2xl mb-2">
+                <h3 className="font-[Recoleta] font-bold text-2xl mb-2 group-hover:text-white">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 group-hover:text-white/90 text-xl">
