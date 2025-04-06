@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="mb-6">
               <Image
                 src={logo}
-                alt="Barkat Ullah Logo"
+                alt="Barkat Ullah"
                 width={160}
                 height={40}
                 priority

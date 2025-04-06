@@ -55,8 +55,8 @@ export default function Hero() {
               </h1>
               <p className="md:text-2xl text-xl mt-4">
                 I build fast, secure, and user-friendly websites with Full Stack
-                and <br /> WordPress development to help grow your business
-                seamlessly.
+                <br />
+                and WordPress development to help grow your business seamlessly.
               </p>
             </motion.div>
           </div>
@@ -76,7 +76,7 @@ export default function Hero() {
             className="bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-5"
           >
             <motion.h2
-              className="font-[Recoleta] text-4xl font-bold text-center"
+              className="font-[Recoleta] text-2xl md:text-4xl font-bold text-center"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{

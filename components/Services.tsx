@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useCallback, useState } from "react";
 import { FaCode, FaRocket, FaShoppingCart, FaWordpress } from "react-icons/fa";
 import { FaBug } from "react-icons/fa6";
 import { SiGitconnected } from "react-icons/si";
@@ -54,6 +55,22 @@ const hoverColors = [
 ];
 
 export default function Services() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoverColorMap, setHoverColorMap] = useState<Record<number, string>>(
+    {}
+  );
+
+  const handleMouseEnter = useCallback((index: number) => {
+    const randomColor =
+      hoverColors[Math.floor(Math.random() * hoverColors.length)];
+    setHoverColorMap((prev) => ({ ...prev, [index]: randomColor }));
+    setHoveredIndex(index);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setHoveredIndex(null);
+  }, []);
+
   return (
     <section className="px-5 md:px-20 py-10">
       <div className="container mx-auto">
@@ -62,46 +79,42 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-4"
         >
-          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold mb-4 ">
+          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold">
             Services For Your Business 🚀
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 2, y: 0 }}
-              transition={{ duration: 0.1, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-[#f9f6f3] rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-2 group"
-              whileHover={{
-                backgroundColor: hoverColors[index % hoverColors.length],
-                boxShadow:
-                  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-                transition: { duration: 0.1 },
-              }}
-            >
-              <div className="flex flex-col p-4">
-                <div
-                  className="mb-4 text-sky-500"
-                  style={{
-                    // Change icon color on hover
-                    transition: "color 0.1s ease",
-                  }}
-                >
-                  {service.icon}
+          {services.map((service, index) => {
+            const isHovered = index === hoveredIndex;
+            const bgColor = isHovered ? hoverColorMap[index] : "#f9f6f3";
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.1, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+                style={{ backgroundColor: bgColor }}
+                className="rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-2 group shadow-md"
+              >
+                <div className="flex flex-col p-4">
+                  <div className="mb-4 text-sky-500 transition-colors duration-100">
+                    {service.icon}
+                  </div>
+                  <h3 className="font-[Recoleta] font-bold text-2xl mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 text-xl">{service.subtitle}</p>
                 </div>
-                <h3 className="font-[Recoleta] font-bold text-2xl mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 text-xl">{service.subtitle}</p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
