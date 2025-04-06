@@ -21,11 +21,22 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<
-    "All" | "Full Stack" | "WordPress" | "Front-End"
-  >("All");
+    "Full Stack" | "WordPress" | "Front-End"
+  >("Full Stack");
 
-  // Default project image
-  const DEFAULT_PROJECT_IMAGE = "https://i.imgur.com/6QJjQMe.png";
+  const hoverColors = [
+    "#cdb4db",
+    "#bdb2ff",
+    "#ffafcc",
+    "#e4c1f9",
+    "#a2d2ff",
+    "#ccd5ae",
+  ];
+
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [cardBgColors, setCardBgColors] = useState<{ [key: string]: string }>(
+    {}
+  );
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -51,11 +62,10 @@ const Projects = () => {
   }, []);
 
   const filteredProjects = projects.filter((project) => {
-    if (activeTab === "All") return true;
     if (activeTab === "Full Stack") return project.category === "Full Stack";
     if (activeTab === "WordPress") return project.category === "WordPress";
     if (activeTab === "Front-End") return project.category === "Front-End";
-    return true;
+    return false;
   });
 
   if (loading) {
@@ -71,7 +81,7 @@ const Projects = () => {
   }
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8">
+    <section className="px-5 md:px-20 py-10">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,153 +93,143 @@ const Projects = () => {
           <h2 className="font-[Recoleta] text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
             My Projects
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Here are some of my recent works categorized by technology stack.
-          </p>
         </motion.div>
 
         {/* Tabs */}
         <div className="flex justify-center mb-8">
           <div className="inline-flex rounded-md shadow-sm" role="group">
-            <button
-              type="button"
-              onClick={() => setActiveTab("All")}
-              className={`px-4 py-2 text-sm font-medium rounded-l-lg border ${
-                activeTab === "All"
-                  ? "bg-blue-500 text-white border-blue-500"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-              }`}
-            >
-              All Projects
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("Full Stack")}
-              className={`px-4 py-2 text-sm font-medium border ${
-                activeTab === "Full Stack"
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-              }`}
-            >
-              Full Stack
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("WordPress")}
-              className={`px-4 py-2 text-sm font-medium border-t border-b ${
-                activeTab === "WordPress"
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-              }`}
-            >
-              WordPress
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("Front-End")}
-              className={`px-4 py-2 text-sm font-medium rounded-r-lg border ${
-                activeTab === "Front-End"
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-              }`}
-            >
-              Front-End
-            </button>
+            {["Full Stack", "WordPress", "Front-End"].map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() =>
+                  setActiveTab(tab as "Full Stack" | "WordPress" | "Front-End")
+                }
+                className={`px-6 py-2 text-sm font-medium border ${
+                  tab === "Full Stack"
+                    ? "rounded-l-lg"
+                    : tab === "Front-End"
+                    ? "rounded-r-lg"
+                    : ""
+                } ${
+                  activeTab === tab
+                    ? "bg-blue-600 text-white border-blue-600"
+                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
         </div>
 
         {filteredProjects.length === 0 ? (
           <div className="text-center py-10">
-            <p className="text-gray-500">No projects found in this category.</p>
+            <p className="text-gray-500">
+              No {activeTab.toLowerCase()} projects found.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project._id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-[#f9f6f3] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={project.photo || DEFAULT_PROJECT_IMAGE}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = DEFAULT_PROJECT_IMAGE;
-                    }}
-                  />
-                </div>
+            {filteredProjects.map((project, index) => {
+              const isHovered = hoveredCard === project._id;
+              const bgColor = isHovered ? cardBgColors[project._id] : "#f9f6f3";
 
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-gray-900">
-                      {project.title}
-                    </h3>
-                    <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                      {project.category}
-                    </span>
-                  </div>
+              return (
+                <motion.div
+                  key={project._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  onMouseEnter={() => {
+                    const randomColor =
+                      hoverColors[
+                        Math.floor(Math.random() * hoverColors.length)
+                      ];
+                    setHoveredCard(project._id);
+                    setCardBgColors((prev) => ({
+                      ...prev,
+                      [project._id]: randomColor,
+                    }));
+                  }}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                  style={{ backgroundColor: bgColor }}
+                >
+                  {project.photo && (
+                    <div className="relative h-64 w-full">
+                      <Image
+                        src={project.photo}
+                        alt={project.title}
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
 
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">
-                      Technologies Used:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
+                  <div className="p-4">
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="font-[Recoleta] text-xl">
+                        {project.title}
+                      </h3>
+                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {project.technology.map((tech, i) => (
                         <span
                           key={i}
-                          className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded"
+                          className="bg-white text-xs px-2 py-1 rounded shadow-sm"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                  </div>
 
-                  <div className="flex flex-col space-y-2 text-sm text-gray-500 mb-4">
-                    <p>* Project details available in GitHub repository</p>
-                  </div>
-
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-                    <a
-                      href={project.livelink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
-                    >
-                      <FaExternalLinkAlt className="mr-1" /> Live Demo
-                    </a>
-                    <div className="flex space-x-4">
-                      <a
-                        href={project.clientlink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
-                      >
-                        <FaGithub className="mr-1" /> Code
-                      </a>
-                      {project.serverlink && (
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                      {project.livelink && (
                         <a
-                          href={project.serverlink}
+                          href={project.livelink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+                        >
+                          <FaExternalLinkAlt className="mr-1" /> Live Demo
+                        </a>
+                      )}
+                      <div className="flex space-x-4">
+                        <a
+                          href={project.clientlink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
                         >
-                          <FaGithub className="mr-1" /> API
+                          <FaGithub className="mr-1" /> Client
                         </a>
-                      )}
+                        {project.serverlink && (
+                          <a
+                            href={project.serverlink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
+                          >
+                            <FaGithub className="mr-1" /> Server
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         )}
       </div>

@@ -64,14 +64,9 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold mb-4 bg-amber-500 text-black p-2 rounded-lg inline-block">
+          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold mb-4 ">
             Services For Your Business 🚀
           </h2>
-
-          <p className="text-gray-600 max-w-2xl mx-auto text-xl">
-            Comprehensive solutions tailored to your specific business needs and
-            goals
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
@@ -82,7 +77,7 @@ export default function Services() {
               whileInView={{ opacity: 2, y: 0 }}
               transition={{ duration: 0.1, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#f9f6f3] rounded-xl p-4 transition-all duration-300 group"
+              className="bg-[#f9f6f3] rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-2 group"
               whileHover={{
                 backgroundColor: hoverColors[index % hoverColors.length],
                 boxShadow:
