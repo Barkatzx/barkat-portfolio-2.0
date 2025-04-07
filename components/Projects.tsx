@@ -44,7 +44,7 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          "https://barkat-portfolio-server.vercel.app/project"
+          "https://barkat-portfolio.vercel.app/project"
         );
         if (!response.ok) throw new Error("Failed to fetch projects");
         const data = await response.json();
