@@ -40,7 +40,7 @@ export default function Header() {
   };
 
   return (
-    <header className=" bg-[#f9f6f3] flex items-center justify-between px-5 md:px-20 py-10 rounded-t-2xl">
+    <header className="bg-[#f9f6f3] flex items-center justify-between px-5 md:px-20 py-10 rounded-t-2xl">
       {/* Logo */}
       <motion.div
         className="flex-1"
@@ -49,7 +49,18 @@ export default function Header() {
         transition={{ duration: 0.5 }}
       >
         <Link href="/" className="text-xl font-bold">
-          <Image src={logo} alt="logo" width={160} height={40} priority />
+          <Image
+            src={logo}
+            alt="logo"
+            width={160}
+            height={40}
+            priority
+            style={{
+              width: "auto",
+              height: "auto",
+            }}
+            className="max-w-full" // Optional: ensures it doesn't overflow its container
+          />
         </Link>
       </motion.div>
 

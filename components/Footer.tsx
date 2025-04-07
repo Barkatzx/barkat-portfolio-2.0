@@ -22,10 +22,15 @@ export default function Footer() {
             <div className="mb-6">
               <Image
                 src={logo}
-                alt="Barkat Ullah"
+                alt="logo"
                 width={160}
                 height={40}
                 priority
+                style={{
+                  width: "auto",
+                  height: "auto",
+                }}
+                className="max-w-full" // Optional: ensures it doesn't overflow its container
               />
             </div>
             <p className="text-gray-600 mb-6 text-center md:text-left">

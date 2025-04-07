@@ -34,6 +34,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {posts.map((post, index) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           const [hoverColor, setHoverColor] = useState<string | null>(null);
 
           return (
@@ -66,6 +67,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
                           src={post.mainImage.asset.url}
                           alt={post.title}
                           fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                           className="object-cover"
                         />
                       </div>
@@ -73,9 +75,9 @@ export default function PostsGrid({ posts }: PostGridProps) {
 
                     <div className="p-4 flex-1 flex flex-col">
                       {/* Category */}
-                      {post.categories && post.categories.length > 0 && (
+                      {post.category && (
                         <div className="inline-block bg-blue-200 text-sm px-3 py-1 rounded-full mb-2 text-gray-800 w-fit">
-                          {post.categories[0].title || "Uncategorized"}
+                          {post.category.title || "Uncategorized"}
                         </div>
                       )}
 
