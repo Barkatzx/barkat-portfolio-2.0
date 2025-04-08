@@ -126,8 +126,8 @@ const Projects = () => {
                   tab === "Full Stack"
                     ? "rounded-l-lg"
                     : tab === "Front-End"
-                    ? "rounded-r-lg"
-                    : ""
+                      ? "rounded-r-lg"
+                      : ""
                 } ${
                   activeTab === tab
                     ? "bg-blue-600 text-white border-blue-600"
@@ -183,6 +183,7 @@ const Projects = () => {
                           src={project.photo}
                           alt={project.title}
                           fill
+                          priority
                           className="object-cover object-center"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           onError={(e) => {
@@ -256,11 +257,11 @@ const Projects = () => {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center items-center mt-10 space-x-4">
+            <div className="flex justify-center items-center mt-5 space-x-4">
               <button
                 onClick={handlePrevious}
                 disabled={currentPage === 1}
-                className="px-4 py-2 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                className="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
               >
                 Previous
               </button>
@@ -270,7 +271,7 @@ const Projects = () => {
               <button
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                className="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
               >
                 Next
               </button>

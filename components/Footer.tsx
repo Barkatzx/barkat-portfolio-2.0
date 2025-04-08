@@ -53,7 +53,7 @@ export default function Footer() {
                 label="Facebook"
               />
               <SocialLink
-                href="https://youtube.com/barkatzx"
+                href="https://www.youtube.com/@BarkatUllahzx"
                 Icon={FaYoutube}
                 label="YouTube"
               />

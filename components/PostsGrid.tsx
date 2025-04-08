@@ -67,6 +67,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
                           src={post.mainImage.asset.url}
                           alt={post.title}
                           fill
+                          priority // 👈 Preloads the image early for better LCP
                           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                           className="object-cover"
                         />

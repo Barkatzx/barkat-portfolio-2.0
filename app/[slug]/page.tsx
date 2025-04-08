@@ -3,8 +3,9 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { PortableText, type SanityDocument } from "next-sanity";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 // GROQ query for fetching post by slug
@@ -75,7 +76,7 @@ export default async function PostPage({
           {post.categories?.map((cat: { title: string }, idx: number) => (
             <span
               key={idx}
-              className="bg-blue-400 px-5 py-2 rounded-full text-lg font-semibold"
+              className="bg-blue-400 text-white px-5 py-2 rounded-full text-lg font-semibold"
             >
               {cat.title}
             </span>
@@ -137,9 +138,29 @@ export default async function PostPage({
       </div>
 
       {/* Post Body */}
-      <div className="px-5 md:px-20 py-10">
+      <div className="px-5 md:px-20 py-10  flex gap-10 items-start lg:flex-row flex-col">
         <div className="prose lg:prose-xl dark:prose-invert mt-6 text-2xl">
           {Array.isArray(post.body) && <PortableText value={post.body} />}
+        </div>
+        <div className="bg-[#f9f6f3] shadow-md rounded-xl md:p-10 p-5">
+          <h1 className="font-[Recoleta] text-4xl font-bold">Barkat Ullah</h1>
+          <p className="text-lg text-gray-700 mt-2 font-bold">
+            Join me on YouTube as I explore the worlds of productivity,
+            business, creativity, and lifelong learning. I share insights from
+            the books I’m reading, lessons I’ve picked up along the way, and
+            practical tips to help you grow. Every journey starts somewhere —
+            let’s grow together, one video at a time. 🌱📚
+          </p>
+          <Link
+            target="_blank"
+            href="https://www.youtube.com/@BarkatUllahzx"
+            rel="noopener noreferrer"
+          >
+            <button className="bg-white p-5 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black mt-4 flex items-center gap-2 text-xl">
+              <FaYoutube className="text-red-700" />
+              Subscribe On Youtube
+            </button>
+          </Link>
         </div>
       </div>
     </main>
