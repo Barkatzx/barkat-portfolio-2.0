@@ -14,9 +14,9 @@ export interface Post {
       url: string;
     };
   };
-  category?: {
+  categories?: {
     title: string;
-  };
+  }[]; // Correct type for categories
 }
 
 const POSTS_QUERY = `*[
