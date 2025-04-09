@@ -106,8 +106,8 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-5"
         >
-          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold mb-4">
-            💻 Explore My Digital Creations ✨
+          <h2 className="font-[Recoleta] text-2xl md:text-5xl font-bold mb-4">
+            Explore My Digital Creations 🎨
           </h2>
         </motion.div>
 
@@ -130,7 +130,7 @@ const Projects = () => {
                       : ""
                 } ${
                   activeTab === tab
-                    ? "bg-blue-600 text-white border-blue-600"
+                    ? "bg-[#9b5de5] text-white border-[#9b5de5]"
                     : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                 }`}
               >
@@ -196,7 +196,7 @@ const Projects = () => {
 
                     <div className="p-4">
                       <div className="flex justify-between items-start mb-4">
-                        <h3 className="font-[Recoleta] text-xl">
+                        <h3 className="font-[Recoleta] text-2xl">
                           {project.title}
                         </h3>
                         <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
@@ -263,7 +263,7 @@ const Projects = () => {
                 disabled={currentPage === 1}
                 className="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
               >
-                Previous
+                Prev
               </button>
               <span className="text-sm text-gray-700">
                 Page {currentPage} of {totalPages}

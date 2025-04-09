@@ -81,8 +81,8 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-4"
         >
-          <h2 className="font-[Recoleta] text-2xl md:text-4xl font-bold">
-            Services For Your Business 🚀
+          <h2 className="font-[Recoleta] text-2xl md:text-5xl">
+            Services For Your Business 📈
           </h2>
         </motion.div>
 
@@ -107,10 +107,10 @@ export default function Services() {
                   <div className="mb-4 text-sky-500 transition-colors duration-100">
                     {service.icon}
                   </div>
-                  <h3 className="font-[Recoleta] font-bold text-2xl mb-2">
+                  <h3 className="font-[Recoleta] text-2xl mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 text-xl">{service.subtitle}</p>
+                  <p className="text-xl">{service.subtitle}</p>
                 </div>
               </motion.div>
             );

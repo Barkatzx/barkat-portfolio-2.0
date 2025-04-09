@@ -48,12 +48,12 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="font-[Recoleta] text-2xl md:text-5xl font-bold text-black">
-                Code That Powers Your Business Growth
+              <h1 className="font-[Recoleta] text-5xl md:text-7xl">
+                Code That Powers Your Business Growth 🚀
                 <br />
                 Let’s Conquer Together!
               </h1>
-              <p className="md:text-2xl text-xl mt-4">
+              <p className="md:text-2xl text-xl mt-4 ">
                 I build fast, secure, and user-friendly websites with Full Stack
                 <br />
                 and WordPress development to help grow your business seamlessly.
@@ -76,7 +76,7 @@ export default function Hero() {
             className="bg-[#f9f6f3] rounded-xl p-4 flex flex-col justify-center items-center py-10 px-5"
           >
             <motion.h2
-              className="font-[Recoleta] text-2xl md:text-4xl font-bold text-center"
+              className="font-[Recoleta] text-2xl md:text-4xl text-center"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{
@@ -127,7 +127,7 @@ export default function Hero() {
             <Counter target={20} duration={1.2} delay={0.6}>
               {(value) => (
                 <motion.h1
-                  className="text-4xl font-bold"
+                  className="text-4xl"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{
@@ -157,7 +157,7 @@ export default function Hero() {
             <Counter target={80} duration={1.5} delay={0.8}>
               {(value) => (
                 <motion.h1
-                  className="text-4xl font-bold"
+                  className="text-4xl"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{

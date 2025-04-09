@@ -76,7 +76,7 @@ export default async function PostPage({
           {post.categories?.map((cat: { title: string }, idx: number) => (
             <span
               key={idx}
-              className="bg-blue-400 text-white px-5 py-2 rounded-full text-lg font-semibold"
+              className="bg-purple-400 px-5 py-2 rounded-full text-lg"
             >
               {cat.title}
             </span>
@@ -84,12 +84,12 @@ export default async function PostPage({
         </div>
 
         {/* Post Title */}
-        <h1 className="md:text-7xl text-3xl font-bold leading-tight font-[Recoleta] z-10">
+        <h1 className="md:text-7xl text-6xl leading-tight font-[Recoleta] z-10">
           {post.title}
         </h1>
 
         {/* Author Info + Share */}
-        <div className="flex flex-col lg:flex-row items-center text-xl font-bold mb-5 justify-between z-10">
+        <div className="flex flex-col lg:flex-row items-start text-xl font-bold mb-5 justify-between z-10">
           <div className="flex flex-col lg:flex-row items-center gap-3 mb-4 lg:mb-0">
             <div className="flex items-center gap-3">
               <Image
@@ -108,9 +108,11 @@ export default async function PostPage({
 
           <div className="flex items-center gap-4 text-lg mt-2 lg:mt-0 z-10">
             <h2 className="text-black">Share:</h2>
-            <button className="bg-white p-2 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black">
-              <FaXTwitter />
-            </button>
+            <a href="#" target="_blank" rel="noopener noreferrer">
+              <button className="bg-white p-2 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black">
+                <FaXTwitter />
+              </button>
+            </a>
             <a href="#" target="_blank" rel="noopener noreferrer">
               <button className="bg-white p-2 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black">
                 <FaFacebook />
@@ -142,9 +144,9 @@ export default async function PostPage({
         <div className="prose lg:prose-xl dark:prose-invert mt-6 text-2xl">
           {Array.isArray(post.body) && <PortableText value={post.body} />}
         </div>
-        <div className="bg-[#f9f6f3] shadow-md rounded-xl md:p-10 p-5">
+        <div className="bg-white shadow-xl rounded-xl md:p-10 p-5">
           <h1 className="font-[Recoleta] text-4xl font-bold">Barkat Ullah</h1>
-          <p className="text-lg text-gray-700 mt-2 font-bold">
+          <p className="text-xl mt-2 ">
             Join me on YouTube as I explore the worlds of productivity,
             business, creativity, and lifelong learning. I share insights from
             the books I’m reading, lessons I’ve picked up along the way, and
@@ -156,7 +158,7 @@ export default async function PostPage({
             href="https://www.youtube.com/@BarkatUllahzx"
             rel="noopener noreferrer"
           >
-            <button className="bg-white p-5 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black mt-4 flex items-center gap-2 text-xl">
+            <button className="bg-gray-100 p-5 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black mt-4 flex items-center gap-2 text-xl">
               <FaYoutube className="text-red-700" />
               Subscribe On Youtube
             </button>

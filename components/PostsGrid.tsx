@@ -26,6 +26,30 @@ interface PostGridProps {
 }
 
 export default function PostsGrid({ posts }: PostGridProps) {
+  const postsPerPage = 6; // Number of posts per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the index of the first and last post based on the current page
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+
+  // Slice the posts array to get the current page's posts
+  const currentPosts = posts.slice(startIndex, endIndex);
+
+  // Handle Next and Previous page navigation
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <main className="px-5 md:px-20 py-10">
       <h1 className="font-[Recoleta] text-2xl md:text-4xl font-bold text-center mb-8">
@@ -33,7 +57,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {posts.map((post, index) => {
+        {currentPosts.map((post, index) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const [hoverColor, setHoverColor] = useState<string | null>(null);
 
@@ -47,7 +71,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
             >
               <Link href={`/${post.slug.current}`} className="h-full block">
                 <div
-                  className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 transform hover:-translate-y-2 cursor-pointer bg-white h-full flex flex-col"
+                  className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 transform hover:-translate-y-2 cursor-pointer bg-[#f9f6f3] h-full flex flex-col"
                   onMouseEnter={() => setHoverColor(getRandomColor())}
                 >
                   {/* Random hover color */}
@@ -75,15 +99,26 @@ export default function PostsGrid({ posts }: PostGridProps) {
                     )}
 
                     <div className="p-4 flex-1 flex flex-col">
-                      {/* Category */}
-                      {post.category && (
-                        <div className="inline-block bg-blue-200 text-sm px-3 py-1 rounded-full mb-2 text-gray-800 w-fit">
-                          {post.category.title || "Uncategorized"}
+                      {/* Categories */}
+                      {post.categories && post.categories.length > 0 ? (
+                        <div className="flex flex-wrap gap-2 mb-2">
+                          {post.categories.map((cat, i) => (
+                            <span
+                              key={i}
+                              className="inline-block bg-[#c9b1fb] text-lg px-3 py-1 rounded-full"
+                            >
+                              {cat.title || "Uncategorized"}
+                            </span>
+                          ))}
                         </div>
+                      ) : (
+                        <span className="inline-block bg-gray-200 text-sm px-3 py-1 rounded-full text-gray-800 mb-2">
+                          Uncategorized
+                        </span>
                       )}
 
                       {/* Title */}
-                      <h2 className="font-[Recoleta] text-xl font-semibold flex-1">
+                      <h2 className="font-[Recoleta] text-2xl flex-1">
                         {post.title}
                       </h2>
                     </div>
@@ -93,6 +128,25 @@ export default function PostsGrid({ posts }: PostGridProps) {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex gap-5 justify-center mt-8 items-center">
+        <button
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md disabled:opacity-50"
+        >
+          Prev
+        </button>
+        <span className="text-sm text-gray-700">Page {currentPage}</span>
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage * postsPerPage >= posts.length}
+          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </main>
   );
