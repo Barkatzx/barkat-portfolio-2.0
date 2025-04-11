@@ -32,13 +32,18 @@ export async function generateStaticParams() {
   const slugs = await client.fetch<string[]>(`*[_type == "post"].slug.current`);
   return slugs.map((slug) => ({ slug }));
 }
+// TypeScript interface for params
+interface Params {
+  slug: string;
+}
 
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  // {params: Promise<{ slug: string }>;}
+  params: Params;
 }) {
-  const { slug } = await params; // Await the params object
+  const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
 
   if (!decodedSlug) return notFound();
@@ -140,13 +145,16 @@ export default async function PostPage({
       </div>
 
       {/* Post Body */}
-      <div className="px-5 md:px-20 py-10  flex gap-10 items-start lg:flex-row flex-col">
-        <div className="prose lg:prose-xl dark:prose-invert mt-6 text-2xl">
+      <div className="px-5 md:px-20 py-10 flex gap-10 items-start lg:flex-row flex-col">
+        {/* Post Body - 70% on large screens */}
+        <div className="mt-6 text-2xl lg:w-[70%] w-full">
           {Array.isArray(post.body) && <PortableText value={post.body} />}
         </div>
-        <div className="bg-white shadow-xl rounded-xl md:p-10 p-5">
+
+        {/* Barkat Div - 30% on large screens */}
+        <div className="bg-[#f9f6f3] shadow-xl rounded-xl p-5 lg:w-[30%] w-full lg:sticky lg:top-20">
           <h1 className="font-[Recoleta] text-4xl font-bold">Barkat Ullah</h1>
-          <p className="text-xl mt-2 ">
+          <p className="text-xl mt-2">
             Join me on YouTube as I explore the worlds of productivity,
             business, creativity, and lifelong learning. I share insights from
             the books I’m reading, lessons I’ve picked up along the way, and
@@ -158,7 +166,7 @@ export default async function PostPage({
             href="https://www.youtube.com/@BarkatUllahzx"
             rel="noopener noreferrer"
           >
-            <button className="bg-gray-100 p-5 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black mt-4 flex items-center gap-2 text-xl">
+            <button className="bg-white p-5 rounded-full hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out text-black mt-4 flex items-center gap-2 text-lg">
               <FaYoutube className="text-red-700" />
               Subscribe On Youtube
             </button>

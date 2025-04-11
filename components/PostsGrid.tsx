@@ -69,7 +69,10 @@ export default function PostsGrid({ posts }: PostGridProps) {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               className="h-full"
             >
-              <Link href={`/${post.slug.current}`} className="h-full block">
+              <Link
+                href={`/blogs/${post.slug.current}`}
+                className="h-full block"
+              >
                 <div
                   className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 transform hover:-translate-y-2 cursor-pointer bg-[#f9f6f3] h-full flex flex-col"
                   onMouseEnter={() => setHoverColor(getRandomColor())}
