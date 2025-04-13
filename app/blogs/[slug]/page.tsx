@@ -1,6 +1,7 @@
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
 import { PortableText, type SanityDocument } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,20 +33,13 @@ export async function generateStaticParams() {
   const slugs = await client.fetch<string[]>(`*[_type == "post"].slug.current`);
   return slugs.map((slug) => ({ slug }));
 }
-// TypeScript interface for params
-interface Params {
-  slug: string;
-}
 
-export default async function PostPage({
-  params,
-}: {
-  // {params: Promise<{ slug: string }>;}
-  params: Params;
-}) {
-  const { slug } = await params;
+// TypeScript type for params
+type tParams = Promise<{ slug: string }>;
+
+export default async function PostPage(props: { params: tParams }) {
+  const { slug } = await props.params;
   const decodedSlug = decodeURIComponent(slug);
-
   if (!decodedSlug) return notFound();
 
   const post = await client.fetch<SanityDocument>(POST_QUERY, {

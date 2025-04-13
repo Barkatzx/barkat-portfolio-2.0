@@ -185,10 +185,6 @@ export default function ProjectGridClient({
                           </span>
                         ))}
                       </div>
-                      <p className="text-red-700 text-sm mb-2">
-                        * Project details available in GitHub repository
-                      </p>
-
                       <div className="flex justify-between items-center pt-2 border-t border-gray-200">
                         {project.livelink && (
                           <a
