@@ -59,7 +59,7 @@ export default function Header() {
               width: "auto",
               height: "auto",
             }}
-            className="max-w-full" // Optional: ensures it doesn't overflow its container
+            className="max-w-full"
           />
         </Link>
       </motion.div>
@@ -138,15 +138,24 @@ export default function Header() {
                 </motion.div>
               ))}
             </nav>
+            <div className=" justify-center flex items-center mb-4">
+              <Link href={`/contact`}>
+                <button className="bg-sky-400 px-8 py-1 rounded-full text-lg font-semibold text-black hover:bg-amber-500 transition-colors">
+                  Contact Me
+                </button>
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Right spacer for desktop */}
       <div className="hidden md:block flex-1">
-        <button className="bg-sky-400 px-8 py-1 rounded-full text-lg font-semibold text-black hover:bg-amber-500 transition-colors">
-          Contact Me
-        </button>
+        <Link href={`/contact`}>
+          <button className="bg-sky-400 px-8 py-1 rounded-full text-lg font-semibold text-black hover:bg-amber-500 transition-colors cursor-pointer">
+            Contact Me
+          </button>
+        </Link>
       </div>
     </header>
   );
