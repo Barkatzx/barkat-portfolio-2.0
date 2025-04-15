@@ -4,12 +4,9 @@ import logo from "@/public/img/logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
-import {
-  SiBuymeacoffee,
-  SiFiverr,
-  SiFreelancer,
-  SiUpwork,
-} from "react-icons/si";
+import { MdWorkspacePremium } from "react-icons/md";
+
+import { SiBuymeacoffee, SiFreelancer, SiUpwork } from "react-icons/si";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -87,9 +84,9 @@ export default function Footer() {
                 label="Upwork"
               />
               <HireLink
-                href="https://fiverr.com/barkatzx"
-                Icon={SiFiverr}
-                label="Fiverr"
+                href="https://kwork.com/user/barkatzx"
+                Icon={MdWorkspacePremium}
+                label="Kwork"
               />
               <HireLink
                 href="https://freelancer.com/u/barkatzx"

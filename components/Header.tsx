@@ -71,7 +71,7 @@ export default function Header() {
           initial="hidden"
           animate="visible"
         >
-          {["Services", "Contact"].map((item, i) => (
+          {["Services", "Github"].map((item, i) => (
             <motion.div
               key={item}
               variants={navItemVariants}
@@ -119,7 +119,7 @@ export default function Header() {
             className="md:hidden absolute top-25 left-3 right-3 bg-[#f9f6f3] shadow-lg z-50 font-bold text-lg"
           >
             <nav className="flex flex-col items-center py-4">
-              {["Services", "Contact"].map((item, i) => (
+              {["Services", "Github"].map((item, i) => (
                 <motion.div
                   key={item}
                   variants={navItemVariants}

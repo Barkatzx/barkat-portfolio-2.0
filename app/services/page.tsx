@@ -81,7 +81,7 @@ export default function Services() {
           viewport={{ once: true }}
           className="mb-4"
         >
-          <h2 className="font-[Recoleta] text-5xl mb-4">
+          <h2 className="font-[Recoleta] text-5xl md:text-7xl mb-4">
             Empowering Your Business with Smart, Scalable Solutions 📈
           </h2>
           <p className="text-xl">
