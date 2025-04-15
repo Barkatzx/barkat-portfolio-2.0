@@ -63,6 +63,7 @@ export default async function ProjectPage(props: { params: tParams }) {
         <h1 className="md:text-7xl text-5xl leading-tight font-[Recoleta] z-10">
           {project.title}
         </h1>
+
         {/* Featured Image */}
         {mainImageUrl && (
           <Image
@@ -105,6 +106,7 @@ export default async function ProjectPage(props: { params: tParams }) {
                 ))}
               </ul>
             </div>
+            {/* // Technology Used Section */}
             <div className="mb-2">
               <h2 className="font-[Recoleta] text-2xl font-semibold mb-2">
                 Technologies Used

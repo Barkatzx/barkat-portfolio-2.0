@@ -72,20 +72,30 @@ export default function Services() {
   }, []);
 
   return (
-    <section className="px-5 md:px-20 py-10">
-      <div className="container mx-auto">
+    <section className="">
+      <div className="bg-[#f9f6f3] px-5 md:px-20 py-10 z-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-4"
+          className="mb-4"
         >
-          <h2 className="font-[Recoleta] text-2xl md:text-5xl">
-            Services For Your Business 📈
+          <h2 className="font-[Recoleta] text-5xl mb-4">
+            Empowering Your Business with Smart, Scalable Solutions 📈
           </h2>
+          <p className="text-xl">
+            From blazing-fast full stack apps to tailored WordPress and
+            WooCommerce experiences, I deliver scalable, high-performance
+            digital solutions. Whether it’s building from scratch, integrating
+            powerful APIs, speeding up your site, or debugging with precision—I
+            ensure your online presence is seamless, secure, and built to grow.
+            Let’s take your business to the next level. 🚀
+          </p>
         </motion.div>
+      </div>
 
+      <div className="px-5 md:px-20 py-10">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
           {services.map((service, index) => {
             const isHovered = index === hoveredIndex;
