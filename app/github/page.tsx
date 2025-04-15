@@ -101,29 +101,54 @@ const PullRequests: FC = () => {
   };
 
   return (
-    <motion.div
-      className="px-5 md:px-20 py-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h1 className="font-[Recoleta] text-4xl font-bold mb-6">
-        Coding Activity Overview
-      </h1>
-      <div className="mb-5">
-        <GitHubCalendar username="barkatzx" />
+    <div>
+      <div className=" bg-[#f9f6f3] px-5 md:px-20 py-10">
+        <motion.div
+          className=""
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="font-[Recoleta] text-5xl md:text-7xl mb-4">
+            Open Source Contributions & Daily Coding Insights 💡
+          </h2>
+          <p className="text-xl">
+            A snapshot of my open source journey — showcasing the repositories
+            I’ve contributed to, pull requests I’ve made, and my daily
+            commitment to coding through insightful activity charts. Explore the
+            projects I’ve collaborated on, the impact of my contributions, and
+            my consistent growth in the open-source community.
+          </p>
+        </motion.div>
       </div>
-      <div className="mb-5">
-        <h1 className="font-[Recoleta] text-4xl font-bold mb-5">
-          Contributed Company
-        </h1>
-        <ContributedRepositories />
-      </div>
-      <h1 className="font-[Recoleta] text-4xl font-bold mb-6">Pull Requests</h1>
-      {renderPRs(openPRs, "bg-green-50 border-green-400")}
-      {renderPRs(mergedPRs, "bg-violet-50 border-violet-400")}
-      {renderPRs(closedPRs, "bg-red-50 border-red-400")}
-    </motion.div>
+      <motion.div
+        className=""
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="px-5 md:px-20 py-10">
+          <h1 className="font-[Recoleta] text-4xl font-bold mb-6">
+            Coding Activity Overview
+          </h1>
+          <div className="mb-5">
+            <GitHubCalendar username="barkatzx" />
+          </div>
+          <div className="mb-5">
+            <h1 className="font-[Recoleta] text-4xl font-bold mb-5">
+              Contributed Company
+            </h1>
+            <ContributedRepositories />
+          </div>
+          <h1 className="font-[Recoleta] text-4xl font-bold mb-6">
+            Pull Requests
+          </h1>
+          {renderPRs(openPRs, "bg-green-50 border-green-400")}
+          {renderPRs(mergedPRs, "bg-violet-50 border-violet-400")}
+          {renderPRs(closedPRs, "bg-red-50 border-red-400")}
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
