@@ -130,9 +130,9 @@ const Contact: React.FC = () => {
             <button
               type="submit"
               value="Send Message"
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition duration-300"
             >
-              <span>Send</span>
+              <span className="text-xl">Send Message</span>
               <MdSend className="text-xl" />
             </button>
           </form>
