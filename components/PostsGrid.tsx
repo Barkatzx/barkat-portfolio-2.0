@@ -108,7 +108,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
                           {post.categories.map((cat, i) => (
                             <span
                               key={i}
-                              className=" bg-pink-200 text-sm px-2 py-1 rounded-full"
+                              className=" inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
                             >
                               {cat.title || "Uncategorized"}
                             </span>

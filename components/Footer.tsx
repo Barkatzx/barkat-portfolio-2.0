@@ -61,7 +61,7 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start">
             <h3 className="font-[Recoleta] text-xl font-bold mb-6">Menu</h3>
             <ul className="space-y-3 text-center md:text-left">
-              {["About", "Services", "Portfolio", "Contact"].map((item) => (
+              {["About", "Services", "Statistics", "Contact"].map((item) => (
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase()}`}
