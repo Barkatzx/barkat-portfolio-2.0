@@ -1,6 +1,5 @@
 import { client } from "@/sanity/client";
-import PostsGrid from "./PostsGrid"; // our client component
-// types.ts
+import PostsGrid from "./PostsGrid";
 
 export interface Post {
   _id: string;

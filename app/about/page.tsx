@@ -6,13 +6,20 @@ import Image from "next/image";
 const skills = [
   "nextjs",
   "typescript",
+  "js",
   "react",
+  "redux",
   "nodejs",
+  "express",
   "tailwind",
+  "bootstrap",
+  "firebase",
   "wordpress",
   "php",
+  "mysql",
   "mongodb",
   "docker",
+  "prisma",
 ];
 
 export default function AboutPage() {
@@ -46,7 +53,7 @@ export default function AboutPage() {
         className="space-y-8"
       >
         <div className="px-5 md:px-20 py-10">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          <h2 className="font-[Recoleta] text-4xl font-bold mb-6">
             Tech Stack
           </h2>
           <div className="flex flex-wrap gap-4">
