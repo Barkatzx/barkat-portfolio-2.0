@@ -26,6 +26,16 @@ export const projectDetailQuery = groq`
     title,
     description,
     photo,
+    photos[] {
+      ...,
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    },
     feature,
     category,
     technology,

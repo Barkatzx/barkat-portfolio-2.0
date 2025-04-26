@@ -24,7 +24,7 @@ const skills = [
 
 export default function AboutPage() {
   return (
-    <main className="container mx-auto">
+    <main>
       {/* About */}
       <div className="px-5 md:px-20 py-10 bg-[#f9f6f3]">
         <motion.section
