@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Post } from "./Blog";
 
 // Pastel colors
@@ -138,17 +139,17 @@ export default function PostsGrid({ posts }: PostGridProps) {
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md disabled:opacity-50"
+          className="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
         >
-          Prev
+          <FaChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
         <span className="text-sm text-gray-700">Page {currentPage}</span>
         <button
           onClick={handleNextPage}
           disabled={currentPage * postsPerPage >= posts.length}
-          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md disabled:opacity-50"
+          className="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
         >
-          Next
+          <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
     </main>

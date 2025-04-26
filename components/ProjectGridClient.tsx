@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaExternalLinkAlt,
+  FaGithub,
+} from "react-icons/fa";
 
 interface Project {
   _id: string;
@@ -230,19 +235,17 @@ export default function ProjectGridClient({
               <button
                 onClick={handlePrevious}
                 disabled={currentPage === 1}
-                className="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                className="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
               >
-                Prev
+                <FaChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
-              <span className="text-sm text-gray-700">
-                Page {currentPage} of {totalPages}
-              </span>
+              <span className="text-sm text-gray-700">Page {currentPage}</span>
               <button
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                className="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
               >
-                Next
+                <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </>
