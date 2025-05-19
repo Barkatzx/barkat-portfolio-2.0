@@ -35,7 +35,7 @@ export default function ProjectGridClient({
   projects = [],
 }: ProjectGridClientProps) {
   const [activeTab, setActiveTab] = useState<
-    "Full Stack" | "WordPress" | "Front-End"
+    "Full Stack" | "WordPress" | "Flutter Apps"
   >("Full Stack");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -67,7 +67,7 @@ export default function ProjectGridClient({
   const handleNext = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const handlePrevious = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-  const handleTabClick = (tab: "Full Stack" | "WordPress" | "Front-End") => {
+  const handleTabClick = (tab: "Full Stack" | "WordPress" | "Flutter Apps") => {
     setActiveTab(tab);
     setCurrentPage(1);
   };
@@ -90,18 +90,18 @@ export default function ProjectGridClient({
         {/* Tabs */}
         <div className="flex justify-center mb-8">
           <div className="inline-flex rounded-md shadow-sm" role="group">
-            {["Full Stack", "WordPress", "Front-End"].map((tab) => (
+            {["Full Stack", "WordPress", "Flutter Apps"].map((tab) => (
               <button
                 key={tab}
                 onClick={() =>
                   handleTabClick(
-                    tab as "Full Stack" | "WordPress" | "Front-End"
+                    tab as "Full Stack" | "WordPress" | "Flutter Apps"
                   )
                 }
                 className={`px-6 py-2 text-sm font-medium border ${
                   tab === "Full Stack"
                     ? "rounded-l-lg"
-                    : tab === "Front-End"
+                    : tab === "Flutter Apps"
                       ? "rounded-r-lg"
                       : ""
                 } ${
