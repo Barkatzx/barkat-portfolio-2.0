@@ -40,13 +40,13 @@ export default async function ProjectPage(props: { params: tParams }) {
 
         {/* Categories */}
         <div>
-          <span className="bg-violet-300 px-5 py-2 rounded-full text-xl">
+          <span className="bg-violet-300 px-2 py-1 rounded-full text-lg">
             {project.category}
           </span>
         </div>
 
         {/* Post Title */}
-        <h1 className="md:text-7xl text-5xl leading-tight font-[Recoleta] z-10">
+        <h1 className="md:text-7xl text-3xl leading-tight font-[Recoleta] z-10">
           {project.title}
         </h1>
 

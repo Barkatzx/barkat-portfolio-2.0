@@ -89,7 +89,7 @@ export default function ProjectGridClient({
 
         {/* Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-md shadow-sm" role="group">
+          <div className="inline-flex rounded-md" role="group">
             {["Full Stack", "WordPress", "Flutter Apps"].map((tab) => (
               <button
                 key={tab}
@@ -200,7 +200,7 @@ export default function ProjectGridClient({
                     <div className="p-4">
                       <Link href={`/projects/${project.slug}`}>
                         <div className="flex justify-between items-start mb-4">
-                          <h3 className="font-[Recoleta] text-2xl hover:underline">
+                          <h3 className="font-[Recoleta] text-xl">
                             {project.title}
                           </h3>
                           <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
