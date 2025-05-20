@@ -14,7 +14,7 @@ import {
 interface Project {
   _id: string;
   title: string;
-  photo: {
+  mainImage: {
     asset: {
       url: string;
     };
@@ -131,6 +131,32 @@ export default function ProjectGridClient({
                   ? cardBgColors[project._id]
                   : "#f9f6f3";
 
+                // Utility to handle image URLs (Sanity or direct URL)
+                function urlFor(mainImage: {
+                  asset: {
+                    url: string;
+                  };
+                }) {
+                  return {
+                    width: (w: number) => ({
+                      height: (h: number) => ({
+                        url: () => {
+                          // If the URL is from Sanity CDN, append width/height params
+                          if (mainImage.asset.url.includes("cdn.sanity.io")) {
+                            const url = new URL(mainImage.asset.url);
+                            url.searchParams.set("w", w.toString());
+                            url.searchParams.set("h", h.toString());
+                            url.searchParams.set("fit", "crop");
+                            return url.toString();
+                          }
+                          // Otherwise, just return the original URL
+                          return mainImage.asset.url;
+                        },
+                      }),
+                    }),
+                  };
+                }
+
                 return (
                   <motion.div
                     key={project._id}
@@ -154,10 +180,13 @@ export default function ProjectGridClient({
                     style={{ backgroundColor: bgColor }}
                   >
                     <Link href={`/projects/${project.slug}`} className="block">
-                      {project.photo?.asset?.url && (
+                      {project.mainImage?.asset && (
                         <div className="relative h-64 w-full">
                           <Image
-                            src={project.photo.asset.url}
+                            src={urlFor(project.mainImage)
+                              .width(800)
+                              .height(400)
+                              .url()}
                             alt={project.title}
                             fill
                             priority

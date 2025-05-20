@@ -5,7 +5,7 @@ export const projectsQuery = groq`
     _id,
     title,
     description,
-    photo {
+    mainImage {
     asset->{
       url
     }
