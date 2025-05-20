@@ -1,7 +1,7 @@
 import { client } from "@/sanity/client";
+import { components } from "@/sanity/portabletext";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
 import { PortableText, type SanityDocument } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -75,7 +75,7 @@ export default async function PostPage(props: { params: tParams }) {
           {post.categories?.map((cat: { title: string }, idx: number) => (
             <span
               key={idx}
-              className="bg-purple-400 px-5 py-2 rounded-full text-lg"
+              className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full"
             >
               {cat.title}
             </span>
@@ -83,7 +83,7 @@ export default async function PostPage(props: { params: tParams }) {
         </div>
 
         {/* Post Title */}
-        <h1 className="md:text-7xl text-5xl leading-tight font-[Recoleta] z-10">
+        <h1 className="md:text-7xl text-3xl font-[Recoleta] z-10">
           {post.title}
         </h1>
 
@@ -130,8 +130,8 @@ export default async function PostPage(props: { params: tParams }) {
           <Image
             src={mainImageUrl}
             alt={post.title}
-            width={800}
-            height={450}
+            width={1200}
+            height={630}
             className="rounded-xl z-10"
             unoptimized
           />
@@ -141,8 +141,10 @@ export default async function PostPage(props: { params: tParams }) {
       {/* Post Body */}
       <div className="px-5 md:px-20 py-10 flex gap-10 items-start lg:flex-row flex-col">
         {/* Post Body - 70% on large screens */}
-        <div className="mt-6 text-2xl lg:w-[70%] w-full">
-          {Array.isArray(post.body) && <PortableText value={post.body} />}
+        <div className="mt-6 text-xl lg:w-[70%] w-full">
+          {Array.isArray(post.body) && (
+            <PortableText value={post.body} components={components} />
+          )}
         </div>
 
         {/* Barkat Div - 30% on large screens */}

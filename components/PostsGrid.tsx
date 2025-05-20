@@ -53,7 +53,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
 
   return (
     <main className="px-5 md:px-20 py-10">
-      <h1 className="font-[Recoleta] text-2xl md:text-4xl font-bold text-center mb-8">
+      <h1 className="font-[Recoleta] text-2xl md:text-4xl font-bold text-center mb-5">
         📝 Thoughts & Stories
       </h1>
 
@@ -122,7 +122,7 @@ export default function PostsGrid({ posts }: PostGridProps) {
                       )}
 
                       {/* Title */}
-                      <h2 className="font-[Recoleta] text-2xl flex-1">
+                      <h2 className="font-[Recoleta] text-xl flex-1">
                         {post.title}
                       </h2>
                     </div>

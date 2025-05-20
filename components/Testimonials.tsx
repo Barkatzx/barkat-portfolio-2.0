@@ -75,7 +75,7 @@ export default function TestimonialSlider() {
 
   return (
     <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-      <h2 className="text-3xl sm:text-4xl font-[Recoleta] text-center mb-8 sm:mb-10">
+      <h2 className="text-2xl md:text-4xl font-[Recoleta] text-center mb-5">
         Our Clients Speak
       </h2>
 
