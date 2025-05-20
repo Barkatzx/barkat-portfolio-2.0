@@ -28,17 +28,17 @@ export default function ImageGallery({ photos }: { photos: Photo[] }) {
 
   return (
     <div className="space-y-4">
-      {/* Main Image */}
+      {/* Main Image (1200x630) */}
       <div
-        className="relative w-full max-w-xs md:max-w-sm aspect-[9/16] mx-auto rounded-xl overflow-hidden cursor-pointer bg-white"
+        className="relative w-full max-w-3xl aspect-[1.9/1] mx-auto rounded-xl overflow-hidden cursor-pointer bg-white"
         onClick={handleMainImageClick}
       >
         <Image
-          src={urlFor(photos[activeIndex]).width(904).height(1600).url()}
+          src={urlFor(photos[activeIndex]).width(1200).height(630).url()}
           alt={`Project image ${activeIndex + 1}`}
           fill
           priority
-          className="object-contain object-center"
+          className="object-cover object-center"
         />
       </div>
 
@@ -57,7 +57,7 @@ export default function ImageGallery({ photos }: { photos: Photo[] }) {
               alt={`Thumbnail ${index + 1}`}
               width={100}
               height={178}
-              className="object-contain w-full h-full bg-white"
+              className="object-cover w-full h-full bg-white"
             />
           </button>
         ))}

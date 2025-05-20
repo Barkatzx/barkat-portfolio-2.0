@@ -180,12 +180,12 @@ export default function ProjectGridClient({
                     style={{ backgroundColor: bgColor }}
                   >
                     <Link href={`/projects/${project.slug}`} className="block">
-                      {project.mainImage?.asset && (
-                        <div className="relative aspect-[1491/933] w-full">
+                      {project.mainImage && (
+                        <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-gray-100">
                           <Image
                             src={urlFor(project.mainImage)
-                              .width(1491)
-                              .height(933)
+                              .width(1200)
+                              .height(630)
                               .url()}
                             alt={project.title}
                             fill
