@@ -181,11 +181,11 @@ export default function ProjectGridClient({
                   >
                     <Link href={`/projects/${project.slug}`} className="block">
                       {project.mainImage?.asset && (
-                        <div className="relative h-64 w-full">
+                        <div className="relative aspect-[1491/933] w-full">
                           <Image
                             src={urlFor(project.mainImage)
-                              .width(800)
-                              .height(400)
+                              .width(1491)
+                              .height(933)
                               .url()}
                             alt={project.title}
                             fill
