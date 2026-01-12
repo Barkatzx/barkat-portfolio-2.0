@@ -1,7 +1,9 @@
 import { client } from "@/sanity/client";
+import { ReactNode } from "react";
 import PostsGrid from "./PostsGrid";
 
 export interface Post {
+  excerpt: ReactNode;
   _id: string;
   title: string;
   slug: {
@@ -15,7 +17,7 @@ export interface Post {
   };
   categories?: {
     title: string;
-  }[]; // Correct type for categories
+  }[];
 }
 
 const POSTS_QUERY = `*[

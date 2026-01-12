@@ -3,30 +3,48 @@
 @font-face {
   font-family: "Recoleta";
   src: url("../public/font/Recoleta-SemiBold.ttf") format("truetype");
-  font-weight: 600;
+  font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Abel";
-  src: url("../public/font/Abel-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Hind";
-  src: url("../public/font/HindSiliguri-Regular.ttf") format("truetype");
-  font-weight: 400;
+  font-family: "Outfit";
+  src: url("../public/font/Outfit-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
   font-style: normal;
 }
 
 body {
   margin: 10px 10px 0px 10px;
-  font-family: "Abel", sans-serif;
+  font-family: "Outfit", sans-serif;
+  background-color: #000000;
 }
 
 @media (min-width: 768px) {
   body {
     margin: 20px 50px 0 50px;
   }
+}
+
+/* Smooth scrolling for the entire website */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00a8ff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4dc3ff;
 }
