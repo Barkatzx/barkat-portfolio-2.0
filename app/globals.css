@@ -25,26 +25,3 @@ body {
     margin: 20px 50px 0 50px;
   }
 }
-
-/* Smooth scrolling for the entire website */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Optional: Custom scrollbar styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #00a8ff;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #4dc3ff;
-}

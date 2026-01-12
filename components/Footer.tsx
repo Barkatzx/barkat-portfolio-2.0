@@ -160,10 +160,7 @@ export default function Footer() {
                         "radial-gradient(circle at center, rgba(0,168,255,0.2) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div
-                    className="p-4 rounded-2xl transition-all duration-300 group-hover:scale-[1.02]"
-                    style={liquidGlassStyle(0.15)}
-                  >
+                  <div className="p-4 rounded-2xl transition-all duration-300 group-hover:scale-[1.02]">
                     <div className="flex items-center gap-4">
                       <div className="relative">
                         <Image
@@ -208,9 +205,8 @@ export default function Footer() {
                     key={idx}
                     href={contact.href}
                     className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:scale-[1.02] group"
-                    style={liquidGlassStyle(0.08)}
                   >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-[#00a8ff]">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-gradient-to-br from-[#00a8ff]/20 to-[#00a8ff]/10">
                       {contact.icon}
                     </div>
                     <div>
@@ -232,13 +228,12 @@ export default function Footer() {
                 <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff]"></div>
                 Quick Links
               </h3>
-              <div className="space-y-2">
+              <div className="">
                 {menuItems.map((item) => (
                   <Link
                     key={item.label}
                     href={item.href}
                     className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:pl-4 group"
-                    style={liquidGlassStyle(0.08)}
                   >
                     <div className="text-[#00a8ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <FaArrowRight className="text-xs" />
@@ -253,7 +248,7 @@ export default function Footer() {
 
             {/* Hire Platforms */}
             <div>
-              <h3 className="font-[Recoleta] text-lg text-white mb-6 flex items-center gap-2">
+              <h3 className="font-[Recoleta] text-lg text-white mb-2 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff]"></div>
                 Hire Me On
               </h3>
@@ -264,13 +259,10 @@ export default function Footer() {
                     href={platform.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative overflow-hidden rounded-xl"
+                    className="group relative overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div
-                      className="relative flex items-center justify-between p-4 transition-all duration-300 group-hover:scale-[1.01]"
-                      style={liquidGlassStyle(0.08)}
-                    >
+                    <div className="absolute inset-0"></div>
+                    <div className="relative flex items-center justify-between p-4 transition-all duration-300 group-hover:scale-[1.01]">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-gradient-to-br from-[#00a8ff]/20 to-[#00a8ff]/10">
                           {platform.icon}
@@ -295,15 +287,12 @@ export default function Footer() {
 
             {/* Connect Section */}
             <div>
-              <h3 className="font-[Recoleta] text-lg text-white mb-6 flex items-center gap-2">
+              <h3 className="font-[Recoleta] text-lg text-white flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff]"></div>
                 Let&apos;s Connect
               </h3>
 
-              <div
-                className="p-6 rounded-2xl mb-6"
-                style={liquidGlassStyle(0.1)}
-              >
+              <div className="p-4">
                 <p className="text-white/70 text-lg mb-6">
                   Follow my journey and get in touch for collaborations or to
                   discuss your next project.
@@ -318,7 +307,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group p-3 rounded-xl transition-all duration-300 hover:scale-[1.03]"
-                      style={liquidGlassStyle(0.08)}
+                      style={liquidGlassStyle(0.04)}
                     >
                       <div className="flex items-center gap-3">
                         <div className="text-white/70 group-hover:text-[#00a8ff] transition-colors">
@@ -332,27 +321,6 @@ export default function Footer() {
                   ))}
                 </div>
               </div>
-
-              {/* CTA Button */}
-              <Link href="/contact">
-                <div className="group relative overflow-hidden rounded-xl cursor-pointer">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div
-                    className="relative p-4 text-center transition-all duration-300 group-hover:scale-[1.02]"
-                    style={liquidGlassStyle(0.1)}
-                  >
-                    <div className="flex items-center justify-center gap-3">
-                      <span className="text-white font-semibold">
-                        Start a Project
-                      </span>
-                      <FaArrowRight className="text-white/70 group-hover:text-[#00a8ff] transform group-hover:translate-x-2 transition-all" />
-                    </div>
-                    <div className="text-xs text-white/50 mt-2">
-                      Let&apos;s discuss your vision
-                    </div>
-                  </div>
-                </div>
-              </Link>
             </div>
           </div>
 

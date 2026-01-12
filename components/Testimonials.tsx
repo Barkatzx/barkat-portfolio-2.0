@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -22,30 +22,8 @@ interface Testimonial {
   date?: string;
 }
 
-// Extracted constants for better maintainability
-const DESIGN_CONSTANTS = {
-  COLORS: {
-    PRIMARY: "#00a8ff",
-    PRIMARY_LIGHT: "#4dc3ff",
-    PRIMARY_DARK: "#0097e6",
-    WHITE: "#ffffff",
-    BLACK: "#000000",
-  },
-  TRANSITIONS: {
-    DURATION: 0.3,
-    EASING: "cubic-bezier(0.4, 0, 0.2, 1)",
-  },
-  BREAKPOINTS: {
-    MOBILE: 768,
-    TABLET: 1024,
-    DESKTOP: 1280,
-  },
-} as const;
-
 export default function TestimonialSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("right");
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isPaused, setIsPaused] = useState(false);
   const autoRotateRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -104,38 +82,23 @@ export default function TestimonialSlider() {
     },
   ];
 
-  // Liquid glass effect utility function
-  const getLiquidGlassStyle = (opacity: number = 0.1) => ({
-    background: `linear-gradient(135deg, rgba(255, 255, 255, ${opacity}) 0%, rgba(255, 255, 255, ${opacity * 0.5}) 100%)`,
-    backdropFilter: "blur(20px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    boxShadow: `
-      0 8px 32px rgba(0, 0, 0, 0.2),
-      0 1px 0 rgba(255, 255, 255, 0.05) inset,
-      0 0 40px rgba(0, 168, 255, 0.1)
-    `,
-  });
-
   const nextTestimonial = useCallback(() => {
-    setDirection("right");
     setCurrentIndex((prev) =>
       prev === testimonials.length - 1 ? 0 : prev + 1
     );
   }, [testimonials.length]);
 
   const prevTestimonial = () => {
-    setDirection("left");
     setCurrentIndex((prev) =>
       prev === 0 ? testimonials.length - 1 : prev - 1
     );
   };
 
   const goToTestimonial = (index: number) => {
-    setDirection(index > currentIndex ? "right" : "left");
     setCurrentIndex(index);
   };
 
-  // Auto-rotation with pause on hover
+  // Auto-rotation
   const startAutoRotate = useCallback(() => {
     if (autoRotateRef.current) {
       clearInterval(autoRotateRef.current);
@@ -166,353 +129,303 @@ export default function TestimonialSlider() {
       {[...Array(5)].map((_, i) => (
         <FaStar
           key={i}
-          className={`text-lg ${i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-600 fill-gray-600"}`}
+          className={`w-4 h-4 ${i < rating ? "text-yellow-500" : "text-white/20"}`}
         />
       ))}
       <span className="ml-2 text-sm text-white/60">({rating}.0)</span>
     </div>
   );
 
+  // Glass effect styles
+  const glassEffect = {
+    background: "rgba(255, 255, 255, 0.05)",
+    backdropFilter: "blur(10px)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+  };
+
+  const glassEffectHover = {
+    background: "rgba(255, 255, 255, 0.08)",
+    backdropFilter: "blur(12px)",
+    border: "1px solid rgba(255, 255, 255, 0.15)",
+    boxShadow: "0 12px 40px rgba(0, 0, 0, 0.25)",
+  };
+
+  const blueGlassEffect = {
+    background: "rgba(59, 130, 246, 0.1)",
+    backdropFilter: "blur(10px)",
+    border: "1px solid rgba(59, 130, 246, 0.2)",
+    boxShadow: "0 8px 32px rgba(59, 130, 246, 0.15)",
+  };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black py-10">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
+    <section className="relative bg-black py-20 px-4 overflow-hidden">
+      {/* Background Glass Effect */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(to right, #fff 1px, transparent 1px),
+                              linear-gradient(to bottom, #fff 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
           }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute w-[1000px] h-[1000px] rounded-full bg-gradient-to-r from-[#00a8ff]/5 via-transparent to-[#00a8ff]/3 blur-3xl"
         />
-        <div className="absolute top-0 left-10 w-64 h-64 bg-[#00a8ff]/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-10 w-64 h-64 bg-[#00a8ff]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+      <div className="relative max-w-7xl mx-auto">
+        {/* Header with Glass Effect */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           className="text-center mb-16"
         >
           {/* Section Label */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            style={glassEffect}
             className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-8"
-            style={getLiquidGlassStyle(0.15)}
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-[#00a8ff] rounded-full blur-lg opacity-50"></div>
-              <div className="relative w-3 h-3 bg-[#00a8ff] rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 bg-blue-500/30 rounded-full blur-sm" />
+              <div className="relative w-3 h-3 bg-blue-500 rounded-full" />
             </div>
-            <span className="text-sm font-semibold text-[#00a8ff]">
+            <span className="text-sm font-medium text-blue-400">
               Client Testimonials
             </span>
           </motion.div>
 
           {/* Main Title */}
-          <h1 className="font-[Recoleta] text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-white/80 bg-clip-text text-transparent">
-              Trusted by Industry
-            </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="text-white">Trusted by</span>
             <br />
-            <span className="bg-gradient-to-r from-[#00a8ff] via-[#4dc3ff] to-[#00a8ff] bg-clip-text text-transparent">
-              Leaders
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+              Industry Leaders
             </span>
-          </h1>
+          </h2>
 
           {/* Subtitle */}
-          <p className="text-white/70 text-xl max-w-3xl mx-auto">
+          <p className="text-white/70 text-lg max-w-3xl mx-auto">
             Join hundreds of satisfied clients who&apos;ve transformed their
             digital presence with cutting-edge solutions
           </p>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Stats */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="lg:col-span-1 space-y-6"
-          >
-            {[
-              {
-                value: "100%",
-                label: "Client Satisfaction Rate",
-                description: "Based on post-project surveys",
-                icon: "⭐",
-              },
-              {
-                value: "50+",
-                label: "Projects Delivered",
-                description: "Across various industries",
-                icon: "🚀",
-              },
-              {
-                value: "24/7",
-                label: "Support Available",
-                description: "Round-the-clock assistance",
-                icon: "🛡️",
-              },
-              {
-                value: "99.9%",
-                label: "Uptime Guarantee",
-                description: "Maximum reliability",
-                icon: "⚡",
-              },
-            ].map((stat, index) => (
+        {/* Stats Grid with Glass Effect */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+        >
+          {[
+            {
+              value: "100%",
+              label: "Client Satisfaction",
+              color: "from-blue-500/20 to-blue-600/10",
+            },
+            {
+              value: "50+",
+              label: "Projects Delivered",
+              color: "from-purple-500/20 to-purple-600/10",
+            },
+            {
+              value: "24/7",
+              label: "Support Available",
+              color: "from-emerald-500/20 to-emerald-600/10",
+            },
+            {
+              value: "99.9%",
+              label: "Uptime Guarantee",
+              color: "from-amber-500/20 to-amber-600/10",
+            },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ y: -5 }}
+              style={glassEffect}
+              className="p-6 rounded-2xl text-center transition-all duration-300 hover:border-blue-500/30"
+            >
               <div
-                key={index}
-                className="rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] group"
-                style={getLiquidGlassStyle(0.1)}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                className={`text-3xl md:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
               >
-                <div className="flex items-start gap-4">
-                  <div className="text-2xl">{stat.icon}</div>
-                  <div>
-                    <div className="flex items-baseline gap-2">
-                      <div
-                        className="text-2xl md:text-3xl font-bold"
-                        style={{ color: DESIGN_CONSTANTS.COLORS.PRIMARY }}
-                      >
-                        {stat.value}
-                      </div>
-                    </div>
-                    <div className="text-white/90 font-semibold mt-1">
-                      {stat.label}
-                    </div>
-                    <div className="text-white/60 text-sm mt-2">
-                      {stat.description}
-                    </div>
+                {stat.value}
+              </div>
+              <div className="text-white/90 font-medium">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Main Testimonial Slider */}
+        <div
+          className="relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Testimonial Card with Glass Effect */}
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            style={glassEffect}
+            className="rounded-3xl p-8 md:p-12 relative overflow-hidden"
+          >
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-blue-500/50 rounded-tl-3xl" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-blue-500/50 rounded-br-3xl" />
+            </div>
+
+            {/* Quote Icon */}
+            <div className="absolute top-8 right-8">
+              <div className="relative">
+                <div className="absolute inset-0 bg-blue-500/20 rounded-xl blur-md" />
+                <div
+                  style={blueGlassEffect}
+                  className="relative w-16 h-16 rounded-2xl flex items-center justify-center"
+                >
+                  <FaQuoteLeft className="text-2xl text-blue-400" />
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="relative">
+              <div className="mb-6">
+                {renderStars(testimonials[currentIndex].rating)}
+              </div>
+
+              <p className="text-xl text-white/90 leading-relaxed mb-8 italic">
+                &ldquo;{testimonials[currentIndex].content}&rdquo;
+              </p>
+
+              {/* Project Tag */}
+              {testimonials[currentIndex].project && (
+                <div className="inline-block mb-8">
+                  <div
+                    style={blueGlassEffect}
+                    className="px-4 py-2 rounded-full"
+                  >
+                    <span className="text-sm font-medium text-blue-400">
+                      Project: {testimonials[currentIndex].project}
+                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              )}
+            </div>
 
-          {/* Right Column - Testimonial Slider */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            <div className="relative">
-              {/* Navigation Buttons - Desktop */}
-              <div className="hidden lg:block absolute -left-20 top-1/2 transform -translate-y-1/2 z-10">
-                <motion.button
-                  onClick={prevTestimonial}
-                  whileHover={{ scale: 1.1, x: -5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-16 h-16 rounded-full flex items-center justify-center group relative"
-                  style={getLiquidGlassStyle(0.15)}
-                  aria-label="Previous testimonial"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <FaChevronLeft className="text-white/70 group-hover:text-[#00a8ff] text-xl transition-colors" />
-                </motion.button>
-              </div>
-
-              <div className="hidden lg:block absolute -right-20 top-1/2 transform -translate-y-1/2 z-10">
-                <motion.button
-                  onClick={nextTestimonial}
-                  whileHover={{ scale: 1.1, x: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-16 h-16 rounded-full flex items-center justify-center group relative"
-                  style={getLiquidGlassStyle(0.15)}
-                  aria-label="Next testimonial"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-l from-[#00a8ff]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <FaChevronRight className="text-white/70 group-hover:text-[#00a8ff] text-xl transition-colors" />
-                </motion.button>
-              </div>
-
-              {/* Testimonial Card */}
-              <div className="relative h-[550px] md:h-[500px]">
-                <AnimatePresence mode="wait" custom={direction}>
-                  <motion.div
-                    key={testimonials[currentIndex].id}
-                    custom={direction}
-                    initial={{
-                      opacity: 0,
-                      x: direction === "right" ? 100 : -100,
+            {/* Author Info with Glass Effect */}
+            <div
+              style={glassEffect}
+              className="mt-8 p-6 rounded-2xl flex items-center gap-6"
+            >
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-sm" />
+                <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-white/20">
+                  <Image
+                    src={testimonials[currentIndex].avatar}
+                    alt={testimonials[currentIndex].name}
+                    width={80}
+                    height={80}
+                    className="object-cover w-full h-full"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonials[currentIndex].name)}&background=3b82f6&color=fff&size=80`;
                     }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: direction === "right" ? -100 : 100 }}
-                    transition={{
-                      duration: 0.5,
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 25,
-                    }}
-                    className="absolute inset-0"
-                  >
-                    <div
-                      className="relative rounded-3xl p-8 md:p-10 h-full flex flex-col group"
-                      style={getLiquidGlassStyle(0.15)}
-                    >
-                      {/* Quote Pattern Background */}
-                      <div className="absolute inset-0 opacity-5">
-                        <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-[#00a8ff] rounded-tl-3xl"></div>
-                        <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-[#00a8ff] rounded-br-3xl"></div>
-                      </div>
-
-                      {/* Quote Icon */}
-                      <div className="absolute top-8 right-8">
-                        <div className="relative">
-                          <div className="absolute inset-0 bg-[#00a8ff] rounded-xl blur-lg opacity-20"></div>
-                          <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#00a8ff]/20 to-transparent border border-[#00a8ff]/30">
-                            <FaQuoteLeft className="text-4xl text-[#00a8ff] opacity-80" />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-grow">
-                        <div className="mb-6">
-                          {renderStars(testimonials[currentIndex].rating)}
-                        </div>
-
-                        <p className="text-xl md:text-2xl lg:text-3xl text-white/90 leading-relaxed italic mb-8 font-light">
-                          &ldquo;{testimonials[currentIndex].content}&rdquo;
-                        </p>
-
-                        {testimonials[currentIndex].project && (
-                          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 bg-gradient-to-r from-[#00a8ff]/10 to-transparent border border-[#00a8ff]/20">
-                            <span className="text-sm font-medium text-[#00a8ff]">
-                              Project: {testimonials[currentIndex].project}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Author Info */}
-                      <div className="flex items-center gap-6 pt-8 border-t border-white/10">
-                        <div className="relative">
-                          <div
-                            className="absolute inset-0 rounded-full blur-xl"
-                            style={{
-                              background: `linear-gradient(135deg, ${DESIGN_CONSTANTS.COLORS.PRIMARY} 0%, ${DESIGN_CONSTANTS.COLORS.PRIMARY_LIGHT} 100%)`,
-                              opacity: 0.3,
-                            }}
-                          ></div>
-                          <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-[#00a8ff]/50 transition-colors">
-                            <Image
-                              src={testimonials[currentIndex].avatar}
-                              alt={testimonials[currentIndex].name}
-                              width={80}
-                              height={80}
-                              className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                              priority={currentIndex === 0}
-                              onError={(e) => {
-                                // Fallback for image loading errors
-                                const target = e.target as HTMLImageElement;
-                                target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonials[currentIndex].name)}&background=00a8ff&color=fff&size=80`;
-                              }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex-grow">
-                          <h4 className="font-[Recoleta] text-2xl font-bold text-white mb-1">
-                            {testimonials[currentIndex].name}
-                          </h4>
-                          <div className="flex items-center gap-2 mb-1">
-                            <p className="text-[#00a8ff] font-semibold">
-                              {testimonials[currentIndex].role}
-                            </p>
-                            {testimonials[currentIndex].company && (
-                              <>
-                                <span className="text-white/30">•</span>
-                                <p className="text-white/70">
-                                  {testimonials[currentIndex].company}
-                                </p>
-                              </>
-                            )}
-                          </div>
-                          {testimonials[currentIndex].date && (
-                            <p className="text-white/50 text-sm">
-                              {testimonials[currentIndex].date}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Dots Indicator */}
-              <div className="flex justify-center mt-10 space-x-3">
-                {testimonials.map((_, index) => (
-                  <motion.button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`relative w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "w-10" : "bg-white/20 hover:bg-white/40"}`}
-                    style={
-                      index === currentIndex
-                        ? {
-                            background: `linear-gradient(135deg, ${DESIGN_CONSTANTS.COLORS.PRIMARY} 0%, ${DESIGN_CONSTANTS.COLORS.PRIMARY_LIGHT} 100%)`,
-                          }
-                        : {}
-                    }
-                    aria-label={`View testimonial from ${testimonials[index].name}`}
-                  >
-                    {index === currentIndex && (
-                      <motion.div
-                        layoutId="activeDot"
-                        className="absolute inset-0 rounded-full bg-white/20"
-                      />
-                    )}
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Mobile Navigation */}
-              <div className="lg:hidden flex justify-center items-center mt-8 space-x-6">
-                <motion.button
-                  onClick={prevTestimonial}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-14 h-14 rounded-full flex items-center justify-center group"
-                  style={getLiquidGlassStyle(0.15)}
-                  aria-label="Previous testimonial"
-                >
-                  <FaChevronLeft className="text-white/70 group-hover:text-[#00a8ff] text-lg transition-colors" />
-                </motion.button>
-
-                <div className="text-white/60 text-sm">
-                  {currentIndex + 1} / {testimonials.length}
+                  />
                 </div>
+              </div>
 
-                <motion.button
-                  onClick={nextTestimonial}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-14 h-14 rounded-full flex items-center justify-center group"
-                  style={getLiquidGlassStyle(0.15)}
-                  aria-label="Next testimonial"
-                >
-                  <FaChevronRight className="text-white/70 group-hover:text-[#00a8ff] text-lg transition-colors" />
-                </motion.button>
+              <div className="flex-1">
+                <h4 className="text-2xl font-bold text-white mb-2">
+                  {testimonials[currentIndex].name}
+                </h4>
+                <div className="flex items-center gap-3 mb-2">
+                  <p className="text-blue-400 font-medium">
+                    {testimonials[currentIndex].role}
+                  </p>
+                  {testimonials[currentIndex].company && (
+                    <>
+                      <span className="text-white/30">•</span>
+                      <p className="text-white/70">
+                        {testimonials[currentIndex].company}
+                      </p>
+                    </>
+                  )}
+                </div>
+                {testimonials[currentIndex].date && (
+                  <p className="text-white/50 text-sm">
+                    {testimonials[currentIndex].date}
+                  </p>
+                )}
               </div>
             </div>
           </motion.div>
+
+          {/* Navigation Controls with Glass Effect */}
+          <div className="flex items-center justify-between mt-8">
+            {/* Dots Indicator */}
+            <div className="flex gap-3">
+              {testimonials.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => goToTestimonial(index)}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  style={index === currentIndex ? blueGlassEffect : glassEffect}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentIndex ? "scale-125" : ""
+                  }`}
+                  aria-label={`View testimonial from ${testimonials[index].name}`}
+                />
+              ))}
+            </div>
+
+            {/* Arrow Buttons with Glass Effect */}
+            <div className="flex gap-4">
+              <motion.button
+                onClick={prevTestimonial}
+                whileHover={{ scale: 1.1, x: -2 }}
+                whileTap={{ scale: 0.9 }}
+                style={glassEffect}
+                className="w-14 h-14 rounded-2xl flex items-center justify-center hover:border-blue-500/30 transition-all duration-300"
+                aria-label="Previous testimonial"
+              >
+                <FaChevronLeft className="text-white/70 hover:text-blue-400 transition-colors" />
+              </motion.button>
+
+              <motion.button
+                onClick={nextTestimonial}
+                whileHover={{ scale: 1.1, x: 2 }}
+                whileTap={{ scale: 0.9 }}
+                style={glassEffect}
+                className="w-14 h-14 rounded-2xl flex items-center justify-center hover:border-blue-500/30 transition-all duration-300"
+                aria-label="Next testimonial"
+              >
+                <FaChevronRight className="text-white/70 hover:text-blue-400 transition-colors" />
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Counter with Glass Effect */}
+          <div className="text-center mt-8">
+            <div
+              style={glassEffect}
+              className="inline-flex items-center gap-4 px-6 py-3 rounded-full"
+            >
+              <span className="text-white/90">
+                <span className="text-blue-400 font-bold">
+                  {currentIndex + 1}
+                </span>
+                <span className="text-white/50"> / {testimonials.length}</span>
+              </span>
+              <div className="text-white/50 text-sm">Testimonials</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
