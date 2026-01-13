@@ -334,7 +334,7 @@ export default function DashboardPage() {
         {stats && (
           <>
             {/* Key Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <motion.div whileHover={{ y: -5 }} className="rounded-2xl">
                 <Glass variant="blue" className="p-5">
                   <div className="flex items-center justify-between mb-4">
