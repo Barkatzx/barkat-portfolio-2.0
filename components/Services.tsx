@@ -108,7 +108,7 @@ export default function Services() {
       };
 
   return (
-    <section className="relative overflow-hidden bg-black px-4 py-12">
+    <section className="relative overflow-hidden bg-black px-4 py-10 container mx-auto">
       {/* Liquid Glass Background Elements - Fixed for hydration */}
       <div className="absolute inset-0 overflow-hidden">
         <div

@@ -88,7 +88,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5 rounded-t-3xl">
+    <footer className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5 rounded-t-3xl container mx-auto">
       {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div

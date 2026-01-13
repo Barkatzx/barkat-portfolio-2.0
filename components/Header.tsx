@@ -140,28 +140,16 @@ export default function Header() {
           stiffness: 100,
           damping: 20,
         }}
-        className="hidden md:block fixed top-4 left-1/2 -translate-x-1/2 z-50"
+        className="hidden md:block fixed top-4 left-1/2 -translate-x-1/2 z-50 container mx-auto px-4"
         style={{
           ...liquidGlassStyle,
-          borderRadius: "24px",
-          width: "calc(90% - 2rem)",
+          borderRadius: "20px",
+          width: "calc(100% - 2rem)",
           maxWidth: "calc(7xl - 2rem)",
         }}
       >
         {/* Animated liquid background */}
-        <div className="absolute inset-0 overflow-hidden rounded-[24px]">
-          <div
-            className="absolute w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#00a8ff]/10 via-transparent to-[#00a8ff]/5"
-            style={{
-              left: `${mousePosition.x * 0.02}px`,
-              top: `${mousePosition.y * 0.02}px`,
-              filter: "blur(40px)",
-              transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-3">
+        <div className="relative z-10 mx-auto px-8 py-3">
           <div className="flex items-center justify-between">
             {/* Logo with Glass Effect */}
             <motion.div
@@ -171,13 +159,12 @@ export default function Header() {
             >
               <Link href="/">
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/10 to-[#00a8ff]/5 blur-xl group-hover:blur-2xl transition-all duration-500 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/10 to-[#00a8ff]/5 blur-lg group-hover:blur-2xl transition-all duration-500 rounded-2xl" />
                   <Image
                     src={logo}
-                    alt="Barkat Ullah Logo"
+                    alt="Barkat Ullah"
                     width={96}
                     height={48}
-                    className="relative rounded-2xl"
                     priority
                   />
                 </div>
@@ -186,7 +173,7 @@ export default function Header() {
 
             {/* Desktop Navigation - White background on hover */}
             <nav className="flex items-center">
-              <div className="flex items-center gap-1 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl px-2 py-2 border border-white/10 shadow-lg shadow-black/10">
+              <div className="flex items-center gap-1 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl px-2 py-2 border border-white/10 shadow-lg shadow-black/10">
                 {navItems.map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -199,7 +186,7 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="relative px-3 py-2.5 text-white/90 hover:text-white font-medium rounded-xl transition-all duration-300 group"
+                      className="relative px-5 py-2.5 text-white/90 hover:text-white rounded-xl transition-all duration-300 group"
                     >
                       <span className="relative">{item.label}</span>
                       {/* White background on hover for desktop */}
@@ -258,7 +245,7 @@ export default function Header() {
                     {/* Shine effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 
-                    <span className="relative z-10 flex items-center gap-2">
+                    <span className="font-[Recoleta] relative z-10 flex items-center gap-2">
                       Get In Touch
                       <motion.span
                         animate={{ x: [0, 3, 0] }}
@@ -298,7 +285,7 @@ export default function Header() {
               className="relative"
             >
               <Link href="/" className="flex items-center gap-3">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/5 to-[#00a8ff]/5 blur-lg" />
+                <div className="" />
                 <Image
                   src={logo}
                   alt="Barkat Ullah"
@@ -313,13 +300,12 @@ export default function Header() {
             {/* Mobile Menu Button with Liquid Effect */}
             <motion.button
               onClick={toggleMenu}
-              className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/5 border border-white/10 flex items-center justify-center overflow-hidden group"
+              className="relative w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden group"
               whileTap={{ scale: 0.9 }}
               aria-label="Toggle menu"
               style={buttonStyle}
             >
               {/* Blue liquid background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#00a8ff]/0 to-[#00a8ff]/0 group-hover:from-[#00a8ff]/30 group-hover:to-[#00a8ff]/20 transition-all duration-300" />
 
               {isMenuOpen ? (
                 <FiX className="relative text-white" size={24} />
@@ -340,7 +326,7 @@ export default function Header() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={closeMenu}
-                className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+                className="fixed inset-0 z-40"
               />
 
               {/* Mobile Menu Panel with Improved Visibility */}
@@ -353,7 +339,6 @@ export default function Header() {
                 style={{
                   background:
                     "linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.85) 100%)",
-                  backdropFilter: "blur(40px) saturate(200%)",
                   border: "1px solid rgba(255, 255, 255, 0.1)",
                   borderRadius: "24px",
                   boxShadow:
@@ -361,7 +346,7 @@ export default function Header() {
                 }}
               >
                 {/* Blue overlay for liquid effect */}
-                <div className="absolute inset-0 bg-[#00a8ff]/5" />
+                <div className="absolute inset-0 bg-[#000000]/50" />
 
                 {/* Animated liquid background - Blue theme */}
                 <div className="absolute inset-0 overflow-hidden">
@@ -434,7 +419,7 @@ export default function Header() {
                   {/* Contact Button with soothing blue color */}
                   <motion.div
                     whileTap={{ scale: 0.95 }}
-                    className="relative overflow-hidden rounded-xl"
+                    className="relative overflow-hidden rounded-xl font-[Recoleta]"
                   >
                     <Link href="/contact" onClick={closeMenu}>
                       <button
