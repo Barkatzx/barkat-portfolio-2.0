@@ -334,8 +334,8 @@ export default function DashboardPage() {
         {stats && (
           <>
             {/* Key Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              <motion.div whileHover={{ y: -5 }} className="rounded-2xl p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <motion.div whileHover={{ y: -5 }} className="rounded-2xl">
                 <Glass variant="blue" className="p-5">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-blue-500/20">
@@ -350,7 +350,7 @@ export default function DashboardPage() {
                 </Glass>
               </motion.div>
 
-              <motion.div whileHover={{ y: -5 }} className="rounded-2xl p-6">
+              <motion.div whileHover={{ y: -5 }} className="rounded-2xl">
                 <Glass variant="white" className="p-5">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-purple-500/20">
@@ -365,7 +365,7 @@ export default function DashboardPage() {
                 </Glass>
               </motion.div>
 
-              <motion.div whileHover={{ y: -5 }} className="rounded-2xl p-6">
+              <motion.div whileHover={{ y: -5 }} className="rounded-2xl">
                 <Glass variant="white" className="p-5">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-emerald-500/20">
@@ -380,7 +380,7 @@ export default function DashboardPage() {
                 </Glass>
               </motion.div>
 
-              <motion.div whileHover={{ y: -5 }} className="rounded-2xl p-6">
+              <motion.div whileHover={{ y: -5 }} className="rounded-2xl">
                 <Glass variant="white" className="p-5">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-amber-500/20">
@@ -404,7 +404,7 @@ export default function DashboardPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl p-6"
+                className="rounded-2xl"
               >
                 <Glass variant="white" className="p-5">
                   <div className="flex items-center gap-3 mb-6">
@@ -462,7 +462,7 @@ export default function DashboardPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl p-6"
+                className="rounded-2xl"
               >
                 <Glass variant="white" className="p-5">
                   <div className="flex items-center gap-3 mb-6">
@@ -528,7 +528,7 @@ export default function DashboardPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl p-6"
+                className="rounded-2xl"
               >
                 <Glass variant="blue" className="p-5">
                   <div className="flex items-center gap-3 mb-6">
@@ -608,7 +608,7 @@ export default function DashboardPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl p-6"
+                className="rounded-2xl"
               >
                 <Glass variant="blue" className="p-5">
                   <div className="flex items-center gap-3 mb-6">
