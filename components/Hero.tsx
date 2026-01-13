@@ -465,7 +465,7 @@ export default function ModernHero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 1.5 }}
-                className="relative p-4 rounded-2xl backdrop-blur-md"
+                className="relative rounded-2xl backdrop-blur-md"
               >
                 <Glass variant="blue" className="py-5 px-2">
                   <div className="text-center">
