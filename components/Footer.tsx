@@ -87,40 +87,8 @@ export default function Footer() {
     },
   ];
 
-  // Liquid glass style utility
-  const liquidGlassStyle = (opacity: number = 0.1) => ({
-    background: `linear-gradient(135deg, 
-      rgba(255, 255, 255, ${opacity}) 0%, 
-      rgba(255, 255, 255, ${opacity * 0.5}) 50%, 
-      rgba(255, 255, 255, ${opacity * 0.2}) 100%
-    )`,
-    backdropFilter: "blur(10px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    boxShadow: `
-      0 4px 20px rgba(0, 0, 0, 0.15),
-      0 1px 0 rgba(255, 255, 255, 0.05) inset,
-      0 0 20px rgba(0, 168, 255, 0.05)
-    `,
-  });
-
-  // Hover glass style
-  const hoverGlassStyle = {
-    background: `linear-gradient(135deg, 
-      rgba(0, 168, 255, 0.15) 0%, 
-      rgba(77, 195, 255, 0.1) 50%, 
-      rgba(0, 168, 255, 0.05) 100%
-    )`,
-    backdropFilter: "blur(12px) saturate(200%)",
-    border: "1px solid rgba(0, 168, 255, 0.2)",
-    boxShadow: `
-      0 8px 32px rgba(0, 168, 255, 0.15),
-      0 2px 0 rgba(255, 255, 255, 0.1) inset,
-      0 0 30px rgba(0, 168, 255, 0.1)
-    `,
-  };
-
   return (
-    <footer className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5 rounded-t-3xl">
       {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -306,8 +274,7 @@ export default function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group p-3 rounded-xl transition-all duration-300 hover:scale-[1.03]"
-                      style={liquidGlassStyle(0.04)}
+                      className="rounded-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#00a8ff]/10 p-3 transition-all duration-300 hover:text-white hover:scale-[1.02] group"
                     >
                       <div className="flex items-center gap-3">
                         <div className="text-white/70 group-hover:text-[#00a8ff] transition-colors">
@@ -337,10 +304,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Copyright */}
             <div className="text-center md:text-left">
-              <div
-                className="inline-flex items-center gap-4 px-6 py-3 rounded-xl"
-                style={liquidGlassStyle(0.08)}
-              >
+              <div className="inline-flex items-center gap-4 px-6 py-3 rounded-xl">
                 <div className="text-white/70">
                   © {currentYear}{" "}
                   <span className="text-white font-medium">Barkat Ullah</span>.
@@ -376,17 +340,6 @@ export default function Footer() {
               <FaArrowRight className="transform rotate-90" />
               Back to Top
             </button>
-          </div>
-
-          {/* Signature Line */}
-          <div className="text-center mt-8">
-            <div className="inline-block px-4 py-2 rounded-lg">
-              <div className="text-xs text-white/40">
-                <span className="text-[#00a8ff]/60">✦</span> Crafting digital
-                excellence
-                <span className="text-[#00a8ff]/60"> ✦</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

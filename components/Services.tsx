@@ -108,17 +108,17 @@ export default function Services() {
       };
 
   return (
-    <section className="relative overflow-hidden bg-black px-4 md:px-8 lg:px-10 py-12 md:py-24">
+    <section className="relative overflow-hidden bg-black px-4 py-12">
       {/* Liquid Glass Background Elements - Fixed for hydration */}
       <div className="absolute inset-0 overflow-hidden">
         <div
           ref={gradientRef}
-          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-[#00a8ff]/10 via-transparent to-[#00a8ff]/5 blur-3xl"
+          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-[#00a8ff]/10 via-transparent to-[#00a8ff]/5 blur-xl"
           style={gradientStyle}
         />
         {/* Static background elements */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00a8ff]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00a8ff]/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00a8ff]/10 rounded-full blur-xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00a8ff]/10 rounded-full blur-xl" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black" />
       </div>
 
@@ -180,7 +180,7 @@ export default function Services() {
               >
                 {/* Blue Hover Effect */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
                   style={{
                     background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
                   }}
@@ -190,7 +190,7 @@ export default function Services() {
                 <div className="relative p-6 md:p-8 h-full flex flex-col">
                   {/* Icon Container */}
                   <div
-                    className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-shadow duration-500"
+                    className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 shadow-2xl group-hover:shadow-2xl transition-shadow duration-500"
                     style={{
                       background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
                     }}
