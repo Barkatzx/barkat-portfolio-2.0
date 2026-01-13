@@ -1,15 +1,22 @@
 import imageUrlBuilder from "@sanity/image-url";
 import { createClient } from "next-sanity";
 
+if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+  throw new Error("NEXT_PUBLIC_SANITY_PROJECT_ID is not defined!");
+}
+
+if (!process.env.NEXT_PUBLIC_SANITY_DATASET) {
+  throw new Error("NEXT_PUBLIC_SANITY_DATASET is not defined!");
+}
+
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, // required!
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: "2024-01-01",
-  useCdn: false,
+  apiVersion: "2026-01-01", // use current date
+  useCdn: false, // always fetch fresh data
 });
 
-console.log("Sanity Project ID:", process.env.SANITY_PROJECT_ID);
-console.log("Sanity Dataset:", process.env.SANITY_DATASET);
+// Image builder helper
 interface SanityImageSource {
   asset: {
     _ref: string;
