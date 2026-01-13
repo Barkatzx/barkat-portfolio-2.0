@@ -18,6 +18,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import Glass from "./ui/Glass";
 
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -60,106 +61,27 @@ const PARTICLE_POSITIONS = [
 ];
 
 // Counter component - Fixed to avoid hydration errors
-function Counter({
-  target,
-  duration,
-  delay = 0,
-  children,
-}: {
+interface CounterProps {
   target: number;
-  duration: number;
+  duration?: number;
   delay?: number;
   children: (value: number) => React.ReactNode;
-}) {
-  const [count, setCount] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const counterRef = useRef<HTMLDivElement>(null);
-  const animationIdRef = useRef<NodeJS.Timeout | null>(null);
-  const animationFrameRef = useRef<number | null>(null);
-  const hasStartedRef = useRef(false);
-  const [isClient, setIsClient] = useState(false);
+}
 
-  // Set isClient to true when component mounts on client
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+function Counter({ target, duration = 2, delay = 0, children }: CounterProps) {
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
-    // Only run on client
-    if (!isClient) return;
-
-    // Clean up any existing animation
-    if (animationIdRef.current) {
-      clearTimeout(animationIdRef.current);
-    }
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    // Reset state
-    setCount(0);
-    hasStartedRef.current = false;
-    setIsAnimating(false);
-
-    // Use IntersectionObserver to trigger animation when counter is in view
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasStartedRef.current && isClient) {
-            hasStartedRef.current = true;
-            setIsAnimating(true);
-
-            // Start animation after delay
-            animationIdRef.current = setTimeout(() => {
-              let start = 0;
-              const increment = target / (duration * 60);
-
-              const animate = () => {
-                start += increment;
-                if (start >= target) {
-                  setCount(target);
-                  setIsAnimating(false);
-                } else {
-                  setCount(Math.floor(start));
-                  animationFrameRef.current = requestAnimationFrame(animate);
-                }
-              };
-
-              animationFrameRef.current = requestAnimationFrame(animate);
-            }, delay * 1000);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "50px" }
-    );
-
-    if (counterRef.current) {
-      observer.observe(counterRef.current);
-    }
-
-    return () => {
-      if (animationIdRef.current) {
-        clearTimeout(animationIdRef.current);
-      }
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-      if (counterRef.current) {
-        observer.unobserve(counterRef.current);
-      }
+    const start = performance.now() + delay * 1000;
+    const step = (timestamp: number) => {
+      const progress = Math.min((timestamp - start) / (duration * 1000), 1);
+      setValue(Math.round(target * progress));
+      if (progress < 1) requestAnimationFrame(step);
     };
-  }, [target, duration, delay, isClient]);
+    requestAnimationFrame(step);
+  }, [target, duration, delay]);
 
-  // Always return children with count value
-  // On server, it will be 0, on client it will be animated value
-  return (
-    <>
-      {/* Hidden element for IntersectionObserver */}
-      <div ref={counterRef} className="absolute opacity-0 w-0 h-0" />
-      {/* Render children with current count */}
-      {children(count)}
-    </>
-  );
+  return <>{children(value)}</>;
 }
 
 export default function ModernHero() {
@@ -199,16 +121,6 @@ export default function ModernHero() {
   const primaryColor = "#00a8ff";
   const primaryColorLight = "#4dc3ff";
   const primaryColorDark = "#0097e6";
-
-  // Liquid glass effect
-  const liquidGlassStyle = {
-    background:
-      "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-    backdropFilter: "blur(20px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    boxShadow:
-      "0 8px 32px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.05) inset",
-  };
 
   const buttonStyle = {
     background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
@@ -270,12 +182,13 @@ export default function ModernHero() {
                 animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-md border border-white/10 hover:border-[#00a8ff]/50 transition-all duration-300 group"
-                style={liquidGlassStyle}
               >
-                <div className="relative">
-                  <div className="w-3 h-3 bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff] rounded-full animate-pulse" />
-                  <div className="absolute inset-0 w-3 h-3 bg-[#00a8ff] rounded-full animate-ping opacity-30" />
-                </div>
+                <Glass variant="blue">
+                  <div className="relative">
+                    <div className="w-3 h-3 bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff] rounded-full animate-pulse" />
+                    <div className="absolute inset-0 w-3 h-3 bg-[#00a8ff] rounded-full animate-ping opacity-30" />
+                  </div>
+                </Glass>
                 <span className="text-sm font-semibold text-white tracking-wide">
                   Your vision. My code. Real results
                 </span>
@@ -410,12 +323,8 @@ export default function ModernHero() {
                 className="grid grid-cols-2 gap-4"
               >
                 {/* Stat 1 - Experience */}
-                <motion.div
-                  variants={itemVariants}
-                  className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl"
-                  style={liquidGlassStyle}
-                >
-                  <div className="relative z-10">
+                <Glass variant="blue">
+                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
                         <FaTrophy className="w-5 h-5 text-[#00a8ff]" />
@@ -433,15 +342,11 @@ export default function ModernHero() {
                       )}
                     </Counter>
                   </div>
-                </motion.div>
+                </Glass>
 
                 {/* Stat 2 - Projects */}
-                <motion.div
-                  variants={itemVariants}
-                  className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl"
-                  style={liquidGlassStyle}
-                >
-                  <div className="relative z-10">
+                <Glass variant="blue">
+                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
                         <FaRocket className="w-5 h-5 text-[#00a8ff]" />
@@ -461,15 +366,12 @@ export default function ModernHero() {
                       )}
                     </Counter>
                   </div>
-                </motion.div>
+                </Glass>
 
                 {/* Stat 3 - Clients */}
-                <motion.div
-                  variants={itemVariants}
-                  className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl"
-                  style={liquidGlassStyle}
-                >
-                  <div className="relative z-10">
+
+                <Glass variant="blue">
+                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
                         <FaGlobe className="w-5 h-5 text-[#00a8ff]" />
@@ -487,15 +389,11 @@ export default function ModernHero() {
                       )}
                     </Counter>
                   </div>
-                </motion.div>
+                </Glass>
 
                 {/* Stat 4 - Success Rate */}
-                <motion.div
-                  variants={itemVariants}
-                  className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl"
-                  style={liquidGlassStyle}
-                >
-                  <div className="relative z-10">
+                <Glass variant="blue">
+                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
                         <FaChartLine className="w-5 h-5 text-[#00a8ff]" />
@@ -513,7 +411,7 @@ export default function ModernHero() {
                       )}
                     </Counter>
                   </div>
-                </motion.div>
+                </Glass>
               </motion.div>
 
               {/* Feature Highlights */}
@@ -523,10 +421,7 @@ export default function ModernHero() {
                 transition={{ delay: 1.2 }}
                 className="space-y-4"
               >
-                <div
-                  className="flex items-center gap-3 p-4 rounded-xl border border-white/10 hover:border-[#00a8ff]/30 transition-all duration-300 group"
-                  style={liquidGlassStyle}
-                >
+                <div className="flex items-center gap-3 p-4 rounded-xl border border-white/10 hover:border-[#00a8ff]/30 transition-all duration-300 group">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10 group-hover:scale-110 transition-transform">
                     <FaBolt className="w-4 h-4 text-[#00a8ff]" />
                   </div>
@@ -538,10 +433,7 @@ export default function ModernHero() {
                   </div>
                 </div>
 
-                <div
-                  className="flex items-center gap-3 p-4 rounded-xl border border-white/10 hover:border-[#00a8ff]/30 transition-all duration-300 group"
-                  style={liquidGlassStyle}
-                >
+                <div className="flex items-center gap-3 p-4 rounded-xl border border-white/10 hover:border-[#00a8ff]/30 transition-all duration-300 group">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10 group-hover:scale-110 transition-transform">
                     <FaShieldAlt className="w-4 h-4 text-[#00a8ff]" />
                   </div>
@@ -555,10 +447,7 @@ export default function ModernHero() {
                   </div>
                 </div>
 
-                <div
-                  className="flex items-center gap-3 p-4 rounded-xl border border-white/10 hover:border-[#00a8ff]/30 transition-all duration-300 group"
-                  style={liquidGlassStyle}
-                >
+                <div className="flex items-center gap-3 p-4 rounded-xl border border-white/10 hover:border-[#00a8ff]/30 transition-all duration-300 group">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10 group-hover:scale-110 transition-transform">
                     <FaHandshake className="w-4 h-4 text-[#00a8ff]" />
                   </div>
@@ -577,41 +466,42 @@ export default function ModernHero() {
                 animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 1.5 }}
                 className="relative p-4 rounded-2xl backdrop-blur-md"
-                style={liquidGlassStyle}
               >
-                <div className="text-center">
-                  <p className="text-sm font-medium text-white/70 mb-3">
-                    TECH STACK
-                  </p>
-                  <div className="flex flex-wrap justify-center gap-3">
-                    {[
-                      "React",
-                      "Next.js",
-                      "TypeScript",
-                      "Node.js",
-                      "MongoDB",
-                      "Firebase",
-                      "Docker",
-                      "Flutter",
-                      "WordPress",
-                      "Php",
-                    ].map((tech, i) => (
-                      <motion.span
-                        key={tech}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                        transition={{ delay: 1.6 + i * 0.1 }}
-                        className="px-3 py-1.5 text-xs font-medium text-white/80 rounded-full border border-white/10 hover:border-[#00a8ff]/50 hover:text-[#00a8ff] transition-all duration-300 cursor-default"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(0, 168, 255, 0.1) 0%, rgba(0, 168, 255, 0.05) 100%)",
-                        }}
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
+                <Glass variant="blue" className="py-5 px-2">
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-white/70 mb-3">
+                      TECH STACK
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {[
+                        "React",
+                        "Next.js",
+                        "TypeScript",
+                        "Node.js",
+                        "MongoDB",
+                        "Firebase",
+                        "Docker",
+                        "Flutter",
+                        "WordPress",
+                        "Php",
+                      ].map((tech, i) => (
+                        <motion.span
+                          key={tech}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                          transition={{ delay: 1.6 + i * 0.1 }}
+                          className="px-3 py-1.5 text-xs font-medium text-white/80 rounded-full border border-white/10 hover:border-[#00a8ff]/50 hover:text-[#00a8ff] transition-all duration-300 cursor-default"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(0, 168, 255, 0.1) 0%, rgba(0, 168, 255, 0.05) 100%)",
+                          }}
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </Glass>
               </motion.div>
             </motion.div>
           </div>
