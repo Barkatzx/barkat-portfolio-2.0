@@ -1,5 +1,6 @@
 "use client";
 
+import { theme } from "@/components/lib/theme";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -28,12 +29,6 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { SiPaypal, SiShopify, SiStripe, SiWoo } from "react-icons/si";
-
-export const theme = {
-  primary: "#00a8ff",
-  primaryLight: "#4dc3ff",
-  primaryDark: "#0097e6",
-};
 
 const commercePlatforms = [
   {
