@@ -72,7 +72,7 @@ const services = [
     gradient: "from-rose-500 to-red-400",
     glow: "rgba(244, 63, 94, 0.2)",
     duration: "2-3 weeks",
-    link: "/services/ui",
+    link: "/services/uiux",
   },
   {
     icon: <FaShieldAlt className="w-8 h-8" />,
