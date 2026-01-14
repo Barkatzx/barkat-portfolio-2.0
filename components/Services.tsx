@@ -4,254 +4,364 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
   FaArrowRight,
+  FaBrain,
+  FaChartLine,
   FaCode,
+  FaCogs,
+  FaInfinity,
+  FaLightbulb,
+  FaPalette,
   FaRocket,
+  FaShieldAlt,
   FaShoppingCart,
   FaWordpress,
 } from "react-icons/fa";
-import { FaBug } from "react-icons/fa6";
-import { SiGitconnected } from "react-icons/si";
+import { SiNextdotjs, SiNodedotjs, SiTailwindcss } from "react-icons/si";
 
 const services = [
   {
-    icon: <FaCode className="w-8 h-8" />,
-    title: "Full Stack Superpowers",
+    icon: <FaRocket className="w-8 h-8" />,
+    title: "MVP Development",
     subtitle:
-      "Building lightning-fast web apps with React, Node.js, Express, and MongoDB – sleek front-end, rock-solid back-end.",
-    emoji: "☕🚀",
+      "Transform ideas into launch-ready products with cutting-edge tech stacks, built for validation and scale.",
+    tags: ["Startup", "React", "Node.js", "Fast-track"],
+    gradient: "from-purple-500 to-pink-500",
+    glow: "rgba(168, 85, 247, 0.2)",
+    duration: "4-6 weeks",
+    link: "/services/mvp",
+  },
+  {
+    icon: <FaCode className="w-8 h-8" />,
+    title: "Custom Applications",
+    subtitle:
+      "Bespoke web applications with intuitive interfaces and robust backends, tailored to your exact needs.",
+    tags: ["Full Stack", "Tailored", "Scalable"],
+    gradient: "from-blue-500 to-cyan-400",
+    glow: "rgba(59, 130, 246, 0.2)",
+    duration: "Custom",
+    link: "/services/custom",
   },
   {
     icon: <FaWordpress className="w-8 h-8" />,
-    title: "WordPress Solutions",
+    title: "Business Systems",
     subtitle:
-      "Custom WordPress themes, plugins, and Elementor designs that make your site run effortlessly.",
-    emoji: "🪄✨",
+      "Professional WordPress ecosystems designed as business assets, easy to manage and built to grow.",
+    tags: ["WordPress", "Business", "CMS"],
+    gradient: "from-emerald-500 to-teal-400",
+    glow: "rgba(16, 185, 129, 0.2)",
+    duration: "2-4 weeks",
+    link: "/services/business",
   },
   {
     icon: <FaShoppingCart className="w-8 h-8" />,
-    title: "WooCommerce Magic",
+    title: "Commerce Solutions",
     subtitle:
-      "High-converting WooCommerce stores with seamless payments and custom features designed to boost sales.",
-    emoji: "💰✨",
+      "High-performing e-commerce systems with seamless checkout and scalable product architecture.",
+    tags: ["WooCommerce", "Revenue", "Scale"],
+    gradient: "from-orange-500 to-amber-400",
+    glow: "rgba(249, 115, 22, 0.2)",
+    duration: "3-5 weeks",
+    link: "/services/commerce",
   },
   {
-    icon: <SiGitconnected className="w-8 h-8" />,
-    title: "The API Connector",
+    icon: <FaPalette className="w-8 h-8" />,
+    title: "UI/UX Design",
     subtitle:
-      "Integrate seamless APIs and connect your site to top-tier third-party services for enhanced functionality.",
-    emoji: "💡🔗",
+      "Beautiful, intuitive interfaces that enhance user experience and drive engagement.",
+    tags: ["Design", "UI/UX", "Figma"],
+    gradient: "from-rose-500 to-red-400",
+    glow: "rgba(244, 63, 94, 0.2)",
+    duration: "2-3 weeks",
+    link: "/services/ui",
   },
   {
-    icon: <FaRocket className="w-8 h-8" />,
-    title: "Turbo Mode",
+    icon: <FaShieldAlt className="w-8 h-8" />,
+    title: "Performance & Security",
     subtitle:
-      "Speed up your website with optimization, boosting load times, SEO, and security for lightning-fast performance.",
-    emoji: "🏎️💨",
+      "Optimize speed and secure your platform with enterprise-grade security measures.",
+    tags: ["Security", "Optimization", "Stability"],
+    gradient: "from-violet-500 to-purple-400",
+    glow: "rgba(139, 92, 246, 0.2)",
+    duration: "Ongoing",
+    link: "/services/performance",
   },
   {
-    icon: <FaBug className="w-8 h-8" />,
-    title: "The Code Doctor",
+    icon: <FaChartLine className="w-8 h-8" />,
+    title: "Growth Analytics",
     subtitle:
-      "Bug fixes and performance optimization to keep your site healthy with error-free code and smooth performance.",
-    emoji: "🩺",
+      "Data-driven insights and analytics to track performance and optimize user journeys.",
+    tags: ["Analytics", "Data", "Growth"],
+    gradient: "from-indigo-500 to-blue-400",
+    glow: "rgba(99, 102, 241, 0.2)",
+    duration: "Custom",
+    link: "/services/growth",
+  },
+  {
+    icon: <FaLightbulb className="w-8 h-8" />,
+    title: "Innovation Lab",
+    subtitle:
+      "Experimental development and proof-of-concept projects using emerging technologies.",
+    tags: ["R&D", "Innovation", "POC"],
+    gradient: "from-yellow-500 to-orange-400",
+    glow: "rgba(234, 179, 8, 0.2)",
+    duration: "Variable",
+    link: "/services/innnovation",
   },
 ];
 
-export default function Services() {
+const techStack = [
+  { icon: <SiNextdotjs className="w-6 h-6" />, name: "Next.js" },
+  { icon: <SiTailwindcss className="w-6 h-6" />, name: "Tailwind" },
+  { icon: <SiNodedotjs className="w-6 h-6" />, name: "Node.js" },
+  { icon: <FaBrain className="w-6 h-6" />, name: "AI/ML" },
+  { icon: <FaCogs className="w-6 h-6" />, name: "Microservices" },
+  { icon: <FaInfinity className="w-6 h-6" />, name: "Scalability" },
+];
+
+// Predefined particle positions (deterministic - same on server and client)
+const particlePositions = [
+  { x: "10%", y: "20%" },
+  { x: "30%", y: "40%" },
+  { x: "50%", y: "10%" },
+  { x: "70%", y: "30%" },
+  { x: "90%", y: "60%" },
+  { x: "20%", y: "80%" },
+  { x: "40%", y: "90%" },
+  { x: "60%", y: "70%" },
+  { x: "80%", y: "50%" },
+  { x: "15%", y: "35%" },
+];
+
+export default function ServicesShowcase() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isClient, setIsClient] = useState(false);
-  const gradientRef = useRef<HTMLDivElement>(null);
+  const [activeService, setActiveService] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsClient(true);
-
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+
+      // Magnetic effect
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll(".service-card");
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+          const maxDistance = 200;
+
+          if (distance < maxDistance) {
+            const strength = (1 - distance / maxDistance) * 0.2;
+            const dx = (centerX - x) * strength;
+            const dy = (centerY - y) * strength;
+
+            (card as HTMLElement).style.transform =
+              `translate(${dx}px, ${dy}px)`;
+          } else {
+            (card as HTMLElement).style.transform = "translate(0, 0)";
+          }
+        });
+      }
     };
+
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // New soothing blue color
-  const primaryColor = "#00a8ff";
-  const primaryColorLight = "#4dc3ff";
-  const primaryColorDark = "#0097e6";
-
-  // Liquid glass effect styles
-  const liquidGlassStyle = {
-    background:
-      "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-    backdropFilter: "blur(20px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    boxShadow:
-      "0 8px 32px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.05) inset",
-  };
-
-  // Button style with soothing blue color
-  const buttonStyle = {
-    background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
-    border: "1px solid rgba(255, 255, 255, 0.2)",
-    boxShadow: `0 8px 32px ${primaryColor}20, 0 2px 8px rgba(255, 255, 255, 0.1) inset`,
-  };
-
-  // Fixed gradient position for hydration safety
-  const gradientStyle = isClient
-    ? {
-        left: `${mousePosition.x * 0.01}px`,
-        top: `${mousePosition.y * 0.01}px`,
-        transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-      }
-    : {
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-      };
-
   return (
-    <section className="relative overflow-hidden bg-black px-4 py-10 container mx-auto">
-      {/* Liquid Glass Background Elements - Fixed for hydration */}
-      <div className="absolute inset-0 overflow-hidden">
+    <section className="relative container mx-auto overflow-hidden">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,rgba(120,119,198,0.1),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_300px_at_80%_80%,rgba(56,189,248,0.05),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_400px_at_20%_30%,rgba(168,85,247,0.05),transparent)]" />
+
+        {/* Grid Pattern */}
         <div
-          ref={gradientRef}
-          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-[#00a8ff]/10 via-transparent to-[#00a8ff]/5 blur-xl"
-          style={gradientStyle}
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                           linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+          }}
         />
-        {/* Static background elements */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00a8ff]/10 rounded-full blur-xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00a8ff]/10 rounded-full blur-xl" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-12 md:mb-16">
+      {/* Fixed Floating Particles (no random values) */}
+      <div className="absolute inset-0 overflow-hidden">
+        {particlePositions.map((pos, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            {/* Section Label */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-              style={liquidGlassStyle}
-            >
-              <span
-                className="w-2 h-2 rounded-full"
-                style={{
-                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
-                }}
-              />
-              <span className="text-sm font-semibold text-[#00a8ff]">
-                Services
-              </span>
-            </div>
+            key={i}
+            className="absolute w-1 h-1 bg-white/10 rounded-full"
+            style={{
+              left: pos.x,
+              top: pos.y,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Infinity,
+              delay: i * 0.2,
+            }}
+          />
+        ))}
+      </div>
 
-            {/* Main Title */}
-            <h2 className="font-[Recoleta] text-4xl md:text-5xl lg:text-6xl mb-6 bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-              Empowering Your Digital Journey
-            </h2>
+      <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 md:mb-24"
+        >
+          {/* Elegant Badge */}
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8">
+            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse" />
+            <span className="text-sm font-medium text-white/80 tracking-widest">
+              What We Deliver
+            </span>
+          </div>
 
-            {/* Subtitle */}
-            <p className="text-xl text-white/70 max-w-4xl mx-auto">
-              From blazing-fast full stack apps to tailored WordPress solutions,
-              I deliver scalable, high-performance digital experiences that grow
-              with your business.
-            </p>
-          </motion.div>
-        </div>
+          {/* Main Title with Gradient */}
+          <h1 className="font-[Recoleta] text-4xl md:text-5xl lg:text-6xl font-light mb-8">
+            <span className="bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+              Digital Craftsmanship
+            </span>
+            <br />
+            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#00a8ff] via-[#4dc3ff] to-[#80d8ff]">
+              for Visionaries
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-xl text-white/60 max-w-3xl mx-auto">
+            Where innovation meets impeccable execution. We transform complex
+            challenges into elegant digital solutions that propel your business
+            forward.
+          </p>
+        </motion.div>
+
+        {/* Tech Stack Carousel */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mb-10"
+        >
+          <div className="flex flex-wrap justify-center gap-5">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.1 }}
+                className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 cursor-pointer"
+              >
+                <div className="text-white/80 group-hover:text-white transition-colors">
+                  {tech.icon}
+                </div>
+                <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                  {tech.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+        >
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative h-full"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              onMouseEnter={() => setActiveService(index)}
+              onMouseLeave={() => setActiveService(null)}
+              className="service-card group relative h-full"
             >
-              {/* Main Card */}
-              <div
-                className="relative rounded-2xl hover:shadow-2xl transition-all duration-500 h-full overflow-hidden"
-                style={liquidGlassStyle}
-              >
-                {/* Blue Hover Effect */}
+              {/* Card Container */}
+              <div className="relative h-full rounded-2xl overflow-hidden">
+                {/* Background Gradient */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
-                  style={{
-                    background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
-                  }}
+                  className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
                 />
 
-                {/* Content */}
-                <div className="relative p-6 md:p-8 h-full flex flex-col">
+                {/* Glass Morphism Overlay */}
+                <div className="relative h-full bg-white/5 backdrop-blur-xl border border-white/10 group-hover:border-white/20 transition-all duration-500 p-6 md:p-8">
                   {/* Icon Container */}
                   <div
-                    className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 shadow-2xl group-hover:shadow-2xl transition-shadow duration-500"
-                    style={{
-                      background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
-                    }}
+                    className={`relative w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}
                   >
-                    <div className="text-white text-xl md:text-2xl">
-                      {service.icon}
-                    </div>
+                    <div className="text-white text-2xl">{service.icon}</div>
 
-                    {/* Hover Effect Circle */}
-                    <div className="absolute inset-0 rounded-2xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Animated Ring */}
+                    <div className="absolute inset-0 rounded-xl border border-white/30 group-hover:animate-ping group-hover:opacity-100 opacity-0 transition-opacity duration-500" />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="font-[Recoleta] text-2xl text-white mb-3 group-hover:text-white/90 transition-colors duration-300">
+                  {/* Service Title */}
+                  <h3 className="font-sans text-xl font-semibold text-white mb-3 group-hover:text-white/90 transition-colors">
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-white/70 text-sm md:text-base mb-6 flex-grow">
+                  <p className="text-white/60 text-sm mb-6 leading-relaxed">
                     {service.subtitle}
                   </p>
 
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {service.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="px-3 py-1 text-xs font-medium rounded-full border border-white/10 bg-white/5 text-white/70 group-hover:text-white transition-colors"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
                   {/* Footer */}
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10 group-hover:border-white/20 transition-colors duration-300">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl md:text-2xl">
-                        {service.emoji}
-                      </span>
-                      <span className="text-xs md:text-sm font-medium text-white/60">
-                        Learn more
-                      </span>
-                    </div>
-                    <div
-                      className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(0, 168, 255, 0.1) 0%, rgba(0, 168, 255, 0.05) 100%)",
-                        border: "1px solid rgba(255, 255, 255, 0.1)",
-                      }}
+                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                    <span className="text-xs font-medium text-white/50">
+                      {service.duration}
+                    </span>
+
+                    {/* Arrow Button */}
+                    <button
+                      className="relative w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center group/btn overflow-hidden"
+                      onClick={() => (window.location.href = service.link)}
                     >
-                      <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 transform group-hover:translate-x-1 transition-transform duration-300 text-white/70 group-hover:text-[#00a8ff]" />
-                    </div>
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}
+                      />
+                      <FaArrowRight className="relative z-10 w-4 h-4 text-white/70 group-hover/btn:text-white transition-colors transform group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
                   </div>
                 </div>
 
-                {/* Hover Line */}
+                {/* Glow Effect */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-                  style={{
-                    background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
-                  }}
+                  className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500 -z-10"
+                  style={{ background: service.glow }}
                 />
               </div>
-
-              {/* Floating Blue Glow on Hover */}
-              <div
-                className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10"
-                style={{
-                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
-                }}
-              />
             </motion.div>
           ))}
         </div>
