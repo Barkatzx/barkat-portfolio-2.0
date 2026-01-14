@@ -324,7 +324,7 @@ export default function ModernHero() {
               >
                 {/* Stat 1 - Experience */}
                 <Glass variant="blue">
-                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
+                  <div className="group relative p-5 rounded-2xl hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
                         <FaTrophy className="w-5 h-5 text-[#00a8ff]" />
