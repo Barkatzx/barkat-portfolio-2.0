@@ -326,7 +326,7 @@ export default function CommerceSolutionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
+    <div className="container mx-auto text-white overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Main gradient orbs */}

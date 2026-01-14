@@ -32,12 +32,6 @@ import {
 import { FaMicrosoft } from "react-icons/fa6";
 import { SiHubspot, SiSalesforce, SiWoo, SiWordpress } from "react-icons/si";
 
-export const theme = {
-  primary: "#00a8ff",
-  primaryLight: "#4dc3ff",
-  primaryDark: "#0097e6",
-};
-
 const businessSystems = [
   {
     category: "Content Management",
@@ -370,6 +364,12 @@ const systemFeatures = [
 export default function BusinessSystemsPage() {
   const [activeProcess, setActiveProcess] = useState(0);
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+
+  const theme = {
+    primary: "#00a8ff",
+    primaryLight: "#4dc3ff",
+    primaryDark: "#0097e6",
+  };
 
   const gradientText = {
     background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryLight}, ${theme.primaryDark})`,
