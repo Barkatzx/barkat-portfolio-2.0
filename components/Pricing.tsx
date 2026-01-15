@@ -28,7 +28,7 @@ export default function PricingComponent() {
       id: 1,
       title: "Landing Page",
       description:
-        "High-converting single page website for your product or service",
+        "A focused, conversion-driven website designed to validate your offer and generate leads fast.",
       price: "$500+",
       priceNote: "Starting at $500",
       icon: <FaGlobe className="text-2xl" />,
@@ -38,15 +38,16 @@ export default function PricingComponent() {
         "SEO Optimization",
         "Contact Form Integration",
         "Social Media Integration",
-        "1 Month Support",
         "Google Analytics Setup",
+        "Post-launch support included",
       ],
       popular: false,
     },
     {
       id: 2,
       title: "Business Website",
-      description: "Professional multi-page website for your business",
+      description:
+        "A scalable, professional website built to establish credibility, attract customers, and support long-term growth.",
       price: "$1,200+",
       priceNote: "From $1,200",
       icon: <FaStore className="text-2xl" />,
@@ -57,15 +58,16 @@ export default function PricingComponent() {
         "Blog Integration",
         "Admin Dashboard",
         "Contact Management",
-        "3 Months Support",
         "Performance Optimization",
+        "Post-launch support included",
       ],
       popular: true,
     },
     {
       id: 3,
       title: "E-commerce",
-      description: "Full-featured online store with payment integration",
+      description:
+        "A revenue-ready e-commerce platform engineered for smooth checkout, operational efficiency, and scale.",
       price: "$2,500+",
       priceNote: "From $2,500",
       icon: <FaShoppingCart className="text-2xl" />,
@@ -77,14 +79,15 @@ export default function PricingComponent() {
         "Order Management",
         "Inventory System",
         "Security Features",
-        "6 Months Support",
+        "Post-launch support included",
       ],
       popular: false,
     },
     {
       id: 4,
       title: "Web Application",
-      description: "Custom web applications tailored to your needs",
+      description:
+        "A fully custom digital system built to support your internal workflows, customers, or product vision.",
       price: "Custom",
       priceNote: "Get a quote",
       icon: <FaCode className="text-2xl" />,
@@ -96,7 +99,7 @@ export default function PricingComponent() {
         "Scalable Architecture",
         "Advanced Security",
         "Performance Monitoring",
-        "12 Months Support",
+        "Post-launch support included",
       ],
       popular: false,
     },
@@ -145,8 +148,8 @@ export default function PricingComponent() {
           </h2>
 
           <p className="text-white/70 text-xl max-w-2xl mx-auto">
-            Choose the perfect plan for your project. All prices include
-            consultation, development, and post-launch support.
+            Every project is scoped carefully. Final pricing depends on
+            requirements, integrations, and timeline.
           </p>
         </div>
 

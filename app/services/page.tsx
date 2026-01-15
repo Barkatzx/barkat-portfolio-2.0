@@ -1,15 +1,19 @@
 "use client";
 
+import Glass from "@/components/ui/Glass";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
   FaArrowRight,
+  FaChartLine,
   FaCode,
+  FaLightbulb,
+  FaPalette,
   FaRocket,
   FaShieldAlt,
+  FaShoppingCart,
   FaWordpress,
 } from "react-icons/fa";
-import Glass from "./ui/Glass";
 
 const services = [
   {
@@ -31,7 +35,7 @@ const services = [
     icon: <FaCode className="w-8 h-8" />,
     title: "Custom Applications",
     subtitle:
-      "We design and develop custom web applications tailored to your exact business needs—whether it’s an internal dashboard, client portal, or data-driven system. Every solution is built with performance, security, and maintainability in mind.",
+      "We help founders and startups turn ideas into real, usable products. From defining core features to building a scalable architecture, we focus on speed, clarity, and validation—so you can test your idea with real users and move forward confidently.",
     tags: [
       "Business Systems",
       "Custom Workflows",
@@ -44,7 +48,7 @@ const services = [
   },
   {
     icon: <FaWordpress className="w-8 h-8" />,
-    title: "Business & CMS",
+    title: "Business Systems",
     subtitle:
       "We build structured, SEO-ready websites using modern CMS solutions that are easy to manage and built to grow. From marketing sites to content-driven platforms, we focus on speed, clarity, and conversion—so your website actually supports your business goals.",
     tags: [
@@ -56,6 +60,36 @@ const services = [
     gradient: "from-emerald-500 to-teal-400",
     duration: "2-4 weeks",
     link: "/services/business",
+  },
+  {
+    icon: <FaShoppingCart className="w-8 h-8" />,
+    title: "Commerce Solutions",
+    subtitle:
+      "We design and develop reliable e-commerce systems with optimized checkout flows, secure payments, and scalable product management. Whether you’re launching or optimizing an existing store, we focus on performance and revenue—not templates.",
+    tags: [
+      "Revenue-Driven",
+      "Optimized Checkout",
+      "Scalable Store",
+      "Secure Payments",
+    ],
+    gradient: "from-orange-500 to-amber-400",
+    duration: "3-5 weeks",
+    link: "/services/commerce",
+  },
+  {
+    icon: <FaPalette className="w-8 h-8" />,
+    title: "UI/UX Design",
+    subtitle:
+      "We create clean, functional interfaces that guide users effortlessly through your product. Our design process balances usability, aesthetics, and business goals—ensuring your platform feels professional and works intuitively from day one.",
+    tags: [
+      "User-Centered",
+      "Conversion-Focused",
+      "Product Design",
+      "Usability",
+    ],
+    gradient: "from-rose-500 to-red-400",
+    duration: "2-3 weeks",
+    link: "/services/uiux",
   },
   {
     icon: <FaShieldAlt className="w-8 h-8" />,
@@ -71,6 +105,37 @@ const services = [
     gradient: "from-violet-500 to-purple-400",
     duration: "Ongoing",
     link: "/services/performance",
+  },
+  {
+    icon: <FaChartLine className="w-8 h-8" />,
+    title: "Growth Analytics",
+    subtitle:
+      "We implement analytics and tracking systems that reveal how users interact with your platform. By turning data into clear insights, we help you optimize user journeys, improve conversions, and measure real performance.",
+    tags: [
+      "Data-Driven",
+      "Data-Driven",
+      "User Insights",
+      "Performance Tracking",
+      "Optimization",
+    ],
+    gradient: "from-indigo-500 to-blue-400",
+    duration: "Custom",
+    link: "/services/growth",
+  },
+  {
+    icon: <FaLightbulb className="w-8 h-8" />,
+    title: "Innovation Lab",
+    subtitle:
+      "We help businesses explore new ideas, features, or technologies through focused proof-of-concept development. This allows you to test feasibility before committing to full-scale development.",
+    tags: [
+      "Idea Testing",
+      "Rapid Prototyping",
+      "Low Risk",
+      "Technical Validation",
+    ],
+    gradient: "from-yellow-500 to-orange-400",
+    duration: "Variable",
+    link: "/services/innnovation",
   },
 ];
 

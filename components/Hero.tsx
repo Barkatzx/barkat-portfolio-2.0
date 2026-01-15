@@ -208,7 +208,7 @@ export default function ModernHero() {
                 initial={{ opacity: 0 }}
                 animate={isLoaded ? { opacity: 1 } : {}}
                 transition={{ delay: 0.6 }}
-                className="text-xl text-white/80"
+                className="text-xl text-white/60"
               >
                 We partner with startups and growing companies to design and
                 build fast, secure, and scalable web platforms. From
