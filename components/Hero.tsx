@@ -18,6 +18,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import { theme } from "./lib/theme";
 import Glass from "./ui/Glass";
 
 const containerVariants = {
@@ -117,15 +118,10 @@ export default function ModernHero() {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
-  // Color scheme
-  const primaryColor = "#00a8ff";
-  const primaryColorLight = "#4dc3ff";
-  const primaryColorDark = "#0097e6";
-
   const buttonStyle = {
-    background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorLight} 100%)`,
+    background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.primaryLight} 100%)`,
     border: "1px solid rgba(255, 255, 255, 0.2)",
-    boxShadow: `0 8px 32px ${primaryColor}20, 0 2px 8px rgba(255, 255, 255, 0.1) inset`,
+    boxShadow: `0 8px 32px ${theme.primary}20, 0 2px 8px rgba(255, 255, 255, 0.1) inset`,
   };
 
   return (
@@ -183,14 +179,12 @@ export default function ModernHero() {
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-md border border-white/10 hover:border-[#00a8ff]/50 transition-all duration-300 group"
               >
-                <Glass variant="blue">
-                  <div className="relative">
-                    <div className="w-3 h-3 bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff] rounded-full animate-pulse" />
-                    <div className="absolute inset-0 w-3 h-3 bg-[#00a8ff] rounded-full animate-ping opacity-30" />
-                  </div>
-                </Glass>
+                <div className="relative">
+                  <div className="w-3 h-3 bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff] rounded-full animate-pulse" />
+                  <div className="absolute inset-0 w-3 h-3 bg-[#00a8ff] rounded-full animate-ping opacity-30" />
+                </div>
                 <span className="text-sm font-semibold text-white tracking-wide">
-                  Your vision. My code. Real results
+                  Helping businesses launch, scale, and operate smarter
                 </span>
                 <FaChevronRight className="w-3 h-3 text-[#00a8ff] transform group-hover:translate-x-1 transition-transform" />
               </motion.div>
@@ -199,19 +193,12 @@ export default function ModernHero() {
               <div className="space-y-4 md:space-y-6">
                 <h1 className="font-[Recoleta] text-4xl md:text-5xl lg:text-6xl">
                   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/90">
-                    Transforming Ideas Into
+                    Web platforms built to support
                   </span>
                   <span className="relative block mt-2 md:mt-3">
                     <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#00a8ff] via-[#4dc3ff] to-[#80d8ff]">
-                      Digital Excellence
+                      Real business growth
                     </span>
-                    {/* Underline effect */}
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={isLoaded ? { scaleX: 1 } : {}}
-                      transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
-                      className="absolute -bottom-2 left-0 h-1 w-full bg-gradient-to-r from-[#00a8ff] via-[#4dc3ff] to-transparent rounded-full origin-left"
-                    />
                   </span>
                 </h1>
               </div>
@@ -223,10 +210,12 @@ export default function ModernHero() {
                 transition={{ delay: 0.6 }}
                 className="text-xl text-white/80"
               >
-                I architect and build high-performance web applications that
-                drive business growth. With cutting-edge technology and
-                user-centric design, I create digital experiences that not only
-                look exceptional but deliver measurable results.
+                We partner with startups and growing companies to design and
+                build fast, secure, and scalable web platforms. From
+                high-performance websites to custom dashboards and internal
+                tools, we focus on clean architecture, measurable outcomes, and
+                long-term maintainability—so your technology supports your
+                business, not slows it down.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -240,7 +229,7 @@ export default function ModernHero() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group relative px-8 md:px-10 py-4 md:py-5 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300"
+                  className="group relative px-8 md:px-10 py-4 md:py-5 text-white font-[Recoleta] rounded-xl overflow-hidden transition-all duration-300"
                   style={buttonStyle}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-3 text-base md:text-lg">
@@ -256,19 +245,13 @@ export default function ModernHero() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="group px-8 md:px-10 py-4 md:py-5 text-white font-semibold rounded-xl border border-white/20 hover:border-[#00a8ff]/50 transition-all duration-300 relative overflow-hidden"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)",
-                  }}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-3">
-                    <Link href="/projects">
-                      <span>View Portfolio</span>
+                    <Link href="https://calendly.com/barkatzx">
+                      <span>Book a Consultation</span>
                     </Link>
                     <FaChevronRight className="w-3 h-3 transform group-hover:translate-x-1 transition-transform" />
                   </span>
-                  {/* Hover gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00a8ff]/0 to-[#00a8ff]/0 group-hover:from-[#00a8ff]/10 group-hover:to-[#00a8ff]/5 transition-all duration-500" />
                 </motion.button>
               </motion.div>
 
@@ -281,26 +264,25 @@ export default function ModernHero() {
               >
                 <div className="flex items-center gap-3">
                   <div className="flex">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <FaStar
-                        key={i}
-                        className="w-4 h-4 text-[#00a8ff] fill-current"
-                      />
-                    ))}
+                    <FaStar className="w-4 h-4 text-[#00a8ff] fill-current" />
                   </div>
-                  <span className="text-white/70 text-sm">Rated 5.0/5.0</span>
+                  <span className="text-white/70 text-sm">
+                    Trusted by clients worldwide
+                  </span>
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-white/10" />
                 <div className="flex items-center gap-3">
                   <FaUsers className="w-4 h-4 text-[#00a8ff]" />
                   <span className="text-white/70 text-sm">
-                    100+ Satisfied Clients
+                    Trusted by 20+ clients
                   </span>
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-white/10" />
                 <div className="flex items-center gap-3">
                   <FaAward className="w-4 h-4 text-[#00a8ff]" />
-                  <span className="text-white/70 text-sm">Industry Awards</span>
+                  <span className="text-white/70 text-sm">
+                    Proven delivery record
+                  </span>
                 </div>
               </motion.div>
             </motion.div>
@@ -320,97 +302,89 @@ export default function ModernHero() {
                 initial="hidden"
                 animate={controls}
                 variants={containerVariants}
-                className="grid grid-cols-2 gap-4"
+                className="grid grid-cols-2 gap-5"
               >
                 {/* Stat 1 - Experience */}
-                <Glass variant="blue">
-                  <div className="group relative p-5 rounded-2xl hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
-                        <FaTrophy className="w-5 h-5 text-[#00a8ff]" />
-                      </div>
-                      <div className="text-xs font-medium text-white/60">
-                        EXPERIENCE
-                      </div>
+                <Glass variant="blue" className="p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
+                      <FaTrophy className="w-5 h-5 text-[#00a8ff]" />
                     </div>
-                    <Counter target={5} duration={2} delay={0.2}>
-                      {(value) => (
-                        <div className="text-4xl font-bold text-white">
-                          {value}+{" "}
-                          <span className="text-lg text-[#00a8ff]">Years</span>
-                        </div>
-                      )}
-                    </Counter>
+                    <div className="text-xs font-medium text-white/60">
+                      EXPERIENCE
+                    </div>
                   </div>
+                  <Counter target={5} duration={2} delay={0.2}>
+                    {(value) => (
+                      <div className="font-[Recoleta] text-4xl text-white">
+                        {value}+{" "}
+                        <span className="text-lg text-[#00a8ff]">Years</span>
+                      </div>
+                    )}
+                  </Counter>
                 </Glass>
 
                 {/* Stat 2 - Projects */}
-                <Glass variant="blue">
-                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
-                        <FaRocket className="w-5 h-5 text-[#00a8ff]" />
-                      </div>
-                      <div className="text-xs font-medium text-white/60">
-                        PROJECTS
-                      </div>
+                <Glass variant="blue" className="p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
+                      <FaRocket className="w-5 h-5 text-[#00a8ff]" />
                     </div>
-                    <Counter target={120} duration={2.5} delay={0.4}>
-                      {(value) => (
-                        <div className="text-4xl font-bold text-white">
-                          {value}+{" "}
-                          <span className="text-lg text-[#00a8ff]">
-                            Delivered
-                          </span>
-                        </div>
-                      )}
-                    </Counter>
+                    <div className="text-xs font-medium text-white/60">
+                      PROJECTS
+                    </div>
                   </div>
+                  <Counter target={120} duration={2.5} delay={0.4}>
+                    {(value) => (
+                      <div className="font-[Recoleta] text-4xl text-white">
+                        {value}+{" "}
+                        <span className="text-lg text-[#00a8ff]">
+                          Delivered
+                        </span>
+                      </div>
+                    )}
+                  </Counter>
                 </Glass>
 
                 {/* Stat 3 - Clients */}
 
-                <Glass variant="blue">
-                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
-                        <FaGlobe className="w-5 h-5 text-[#00a8ff]" />
-                      </div>
-                      <div className="text-xs font-medium text-white/60">
-                        CLIENTS
-                      </div>
+                <Glass variant="blue" className="p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
+                      <FaGlobe className="w-5 h-5 text-[#00a8ff]" />
                     </div>
-                    <Counter target={80} duration={2} delay={0.6}>
-                      {(value) => (
-                        <div className="text-4xl font-bold text-white">
-                          {value}+{" "}
-                          <span className="text-lg text-[#00a8ff]">Global</span>
-                        </div>
-                      )}
-                    </Counter>
+                    <div className="text-xs font-medium text-white/60">
+                      CLIENTS
+                    </div>
                   </div>
+                  <Counter target={80} duration={2} delay={0.6}>
+                    {(value) => (
+                      <div className="font-[Recoleta] text-4xl text-white">
+                        {value}+{" "}
+                        <span className="text-lg text-[#00a8ff]">Global</span>
+                      </div>
+                    )}
+                  </Counter>
                 </Glass>
 
                 {/* Stat 4 - Success Rate */}
-                <Glass variant="blue">
-                  <div className="group relative p-5 rounded-2xl border border-white/10 hover:border-[#00a8ff]/40 transition-all duration-500 overflow-hidden hover:shadow-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
-                        <FaChartLine className="w-5 h-5 text-[#00a8ff]" />
-                      </div>
-                      <div className="text-xs font-medium text-white/60">
-                        SUCCESS
-                      </div>
+                <Glass variant="blue" className="p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-[#00a8ff]/20 to-[#4dc3ff]/10">
+                      <FaChartLine className="w-5 h-5 text-[#00a8ff]" />
                     </div>
-                    <Counter target={98} duration={2} delay={0.8}>
-                      {(value) => (
-                        <div className="text-4xl font-bold text-white">
-                          {value}%{" "}
-                          <span className="text-lg text-[#00a8ff]">Rate</span>
-                        </div>
-                      )}
-                    </Counter>
+                    <div className="text-xs font-medium text-white/60">
+                      SUCCESS
+                    </div>
                   </div>
+                  <Counter target={98} duration={2} delay={0.8}>
+                    {(value) => (
+                      <div className="font-[Recoleta] text-4xl text-white">
+                        {value}%{" "}
+                        <span className="text-lg text-[#00a8ff]">Rate</span>
+                      </div>
+                    )}
+                  </Counter>
                 </Glass>
               </motion.div>
 
@@ -426,9 +400,11 @@ export default function ModernHero() {
                     <FaBolt className="w-4 h-4 text-[#00a8ff]" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-white">Lightning Fast</p>
+                    <p className="font-semibold text-white">
+                      Performance-Focused
+                    </p>
                     <p className="text-sm text-white/60">
-                      90+ PageSpeed Scores
+                      Optimized for speed & SEO
                     </p>
                   </div>
                 </div>
@@ -442,7 +418,7 @@ export default function ModernHero() {
                       Secure & Scalable
                     </p>
                     <p className="text-sm text-white/60">
-                      Enterprise-grade Security
+                      Built for long-term growth
                     </p>
                   </div>
                 </div>
@@ -452,9 +428,11 @@ export default function ModernHero() {
                     <FaHandshake className="w-4 h-4 text-[#00a8ff]" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-white">Ongoing Support</p>
+                    <p className="font-semibold text-white">
+                      Long-Term Partnership
+                    </p>
                     <p className="text-sm text-white/60">
-                      24/7 Technical Assistance
+                      Support beyond launch
                     </p>
                   </div>
                 </div>
@@ -470,7 +448,7 @@ export default function ModernHero() {
                 <Glass variant="blue" className="py-5 px-2">
                   <div className="text-center">
                     <p className="text-sm font-medium text-white/70 mb-3">
-                      TECH STACK
+                      POPULAR TECH STACK
                     </p>
                     <div className="flex flex-wrap justify-center gap-3">
                       {[
