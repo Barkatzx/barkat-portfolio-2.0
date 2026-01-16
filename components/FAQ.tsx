@@ -163,7 +163,7 @@ export default function FAQComponent() {
           </h1>
 
           <p className="text-white/70 text-xl max-w-2xl mx-auto">
-            Detailed insights about our services, process, and how we
+            Detailed insights about our services, process, and how we,
             collaborate to deliver exceptional results
           </p>
         </motion.div>

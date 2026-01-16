@@ -15,6 +15,7 @@ interface Project {
   livelink?: string;
   clientlink?: string;
   serverlink?: string;
+  description?: string;
 }
 
 // Query to fetch all projects
@@ -29,6 +30,7 @@ const PROJECTS_QUERY = `*[
     }
   },
   category,
+  description,
   technology,
   slug,
   livelink,
