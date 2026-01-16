@@ -88,7 +88,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5 rounded-t-3xl container mx-auto">
+    <footer className="relative container mx-auto flex items-center justify-center overflow-hidden bg-black md:py-15 py-10 rounded-2xl mt-5 md:mt-2">
       {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div

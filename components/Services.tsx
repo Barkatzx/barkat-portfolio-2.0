@@ -146,16 +146,12 @@ export default function ServicesShowcase() {
           </div>
 
           {/* Main Title with Gradient */}
-          <h1 className="font-[Recoleta] text-4xl md:text-5xl lg:text-6xl font-light mb-8">
-            <span className="bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-              Engineering Digital Products for
-              <br />
-              Growth-Focused Businesses
-            </span>
-          </h1>
+          <h2 className="font-[Recoleta] text-4xl md:text-5xl mb-6 bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+            Growth-Ready Digital Products
+          </h2>
 
           {/* Subtitle */}
-          <p className="text-xl text-white/60 max-w-3xl mx-auto">
+          <p className="text-white/70 text-xl max-w-2xl mx-auto">
             We design and build scalable digital platforms that solve real
             business problems. By combining thoughtful design with robust
             engineering, we turn complex requirements into clean, reliable

@@ -158,13 +158,11 @@ export default function FAQComponent() {
             </div>
           </motion.div>
 
-          <h1 className="font-[Recoleta] text-4xl md:text-5xl lg:text-6xl font-light mb-8">
-            <span className="bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-              Question and Answer
-            </span>
+          <h1 className="font-[Recoleta] text-4xl md:text-5xl mb-6 bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+            Question and Answer
           </h1>
 
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-xl max-w-2xl mx-auto">
             Detailed insights about our services, process, and how we
             collaborate to deliver exceptional results
           </p>

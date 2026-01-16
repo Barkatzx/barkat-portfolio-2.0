@@ -123,7 +123,7 @@ export default function PricingComponent() {
             </div>
           </motion.div>
 
-          <h2 className="font-[Recoleta] text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+          <h2 className="font-[Recoleta] text-4xl md:text-5xl mb-6 bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
             Transparent Pricing
           </h2>
 

@@ -125,7 +125,7 @@ export default function ModernHero() {
   };
 
   return (
-    <section className="relative container mx-auto flex items-center justify-center overflow-hidden bg-black py-5 rounded-3xl mt-5 md:mt-2">
+    <section className="relative container mx-auto flex items-center justify-center overflow-hidden bg-black md:py-15 py-10 rounded-2xl mt-5 md:mt-2">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Main moving gradient - Fixed initial position */}
@@ -180,8 +180,8 @@ export default function ModernHero() {
                 className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-md border border-white/10 hover:border-[#00a8ff]/50 transition-all duration-300 group"
               >
                 <div className="relative">
-                  <div className="w-3 h-3 bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff] rounded-full animate-pulse" />
-                  <div className="absolute inset-0 w-3 h-3 bg-[#00a8ff] rounded-full animate-ping opacity-30" />
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00a8ff] to-[#4dc3ff] rounded-full animate-pulse" />
+                  <div className="absolute inset-0 w-2 h-2 bg-[#00a8ff] rounded-full animate-ping opacity-30" />
                 </div>
                 <span className="text-sm font-semibold text-white tracking-wide">
                   Helping businesses launch, scale, and operate smarter
@@ -191,16 +191,9 @@ export default function ModernHero() {
 
               {/* Main Headline */}
               <div className="space-y-4 md:space-y-6">
-                <h1 className="font-[Recoleta] text-4xl md:text-5xl lg:text-6xl">
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/90">
-                    Web platforms built to support
-                  </span>
-                  <span className="relative block mt-2 md:mt-3">
-                    <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#00a8ff] via-[#4dc3ff] to-[#80d8ff]">
-                      Real business growth
-                    </span>
-                  </span>
-                </h1>
+                <h2 className="font-[Recoleta] text-4xl md:text-6xl mb-6 bg-gradient-to-r from-white via-white/90 to-white/10 bg-clip-text text-transparent">
+                  Web platforms built to support Real business growth
+                </h2>
               </div>
 
               {/* Description */}
